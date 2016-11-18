@@ -65,7 +65,7 @@ public abstract class ResourceTestBase<T extends Entity> {
     @Test
     public void testFindAll() {
         System.out.println("findAll");
-        mockServer.expect(requestTo(resource.fiscalUrl + "/" + resourceName + "?ForceNoPaging=true")).andExpect(method(HttpMethod.GET))
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "?ForceNoPaging=true")).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedFindAllResponse());
         List<T> entities = resource.findAll();
         for(T entity : entities) {
@@ -80,7 +80,7 @@ public abstract class ResourceTestBase<T extends Entity> {
         System.out.println("get");
         String id = "42L";
         
-        mockServer.expect(requestTo(resource.fiscalUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedGetResponse());
         T entity = resource.get(id);
         doCheckEntity(entity);
@@ -93,7 +93,7 @@ public abstract class ResourceTestBase<T extends Entity> {
         System.out.println("get");
         String id = null;
         
-        mockServer.expect(requestTo(resource.fiscalUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.NOT_FOUND));
         T entity = resource.get(id);
         assertNull(entity);
@@ -105,9 +105,9 @@ public abstract class ResourceTestBase<T extends Entity> {
         System.out.println("save");
         String id = "42L";
         
-        mockServer.expect(requestTo(resource.fiscalUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedGetResponse());
-        mockServer.expect(requestTo(resource.fiscalUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.PUT)).andExpect(generateExpectedSaveRequest())
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.PUT)).andExpect(generateExpectedSaveRequest())
                 .andRespond(generateExpectedGetResponse());
         T entity = resource.get(id);
         resource.save(entity);
@@ -118,7 +118,7 @@ public abstract class ResourceTestBase<T extends Entity> {
     
     public static RestTemplate buildRestTemplate() {
         RestTemplate rt = new RestTemplate();
-        RestTemplateHelper.configureForXenaJargon(rt);
+        RestTemplateHelper.configureForBillyJargon(rt);
         return rt;
     }
 }

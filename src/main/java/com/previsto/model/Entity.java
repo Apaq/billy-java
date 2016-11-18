@@ -1,19 +1,21 @@
 package com.previsto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import org.springframework.data.domain.Persistable;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public abstract class Entity implements Persistable<String> {
 
+    @JsonProperty("isArchived")
     private boolean archived;
 
     private String id;
 
-    protected Long createdBy;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    protected Instant createdTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    protected LocalDateTime createdTime;
     
     public String getId() {
         return id;
@@ -23,16 +25,16 @@ public abstract class Entity implements Persistable<String> {
         this.id = id;
     }
 
-    public Instant getCreatedTime() {
+    public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Instant createdTime) {
+    public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
 
-    
     @Override
+    @JsonIgnore
     public boolean isNew() {
         return id == null;
     }

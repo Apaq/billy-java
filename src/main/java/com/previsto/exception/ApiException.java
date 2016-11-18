@@ -9,8 +9,8 @@ import java.util.Arrays;
 public class ApiException extends BillyException {
 
     @JsonCreator
-    public ApiException(@JsonProperty(value = "AssignedId") int assignedId, @JsonProperty(value = "Messages") String[] messages, @JsonProperty(value = "Success") Boolean success) {
-        super(Arrays.toString(messages));
+    public ApiException(@JsonProperty("errorMessage") String errorMessage, @JsonProperty("errorCode") String errorCode) {
+        super(errorMessage);
     }
 
     
