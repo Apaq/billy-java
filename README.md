@@ -1,6 +1,6 @@
-# Xena Java Bindings 
+# Billy Java Bindings 
 
-You can sign up for a Xena account at https://xena.biz.
+You can sign up for a Billy account at https://billy.dk.
 
 Requirements
 ============
@@ -16,8 +16,8 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>dk.xena</groupId>
-  <artifactId>xena-java</artifactId>
+  <groupId>com.previsto</groupId>
+  <artifactId>billy.java</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
@@ -30,23 +30,22 @@ Usage in Spring Boot
 
 application.yml
 ```yml
-xena:
-  serviceUrl: http://xena.biz/Api
-  blobUrl: http://xena.biz/Blob
+billy:
+  serviceUrl: http://billy.dk/api
   apiKey: YOUR_API_KEY
   fiscalId: YOUR_FISCAL_ID
 ```
 
-XenaExample.java
+BillyExample.java
 
 ```java
-import dk.xena.model.Subscription;
+import com.previsto.model.Subscription;
 
 @SpringBootApplication
-public class XenaExample {
+public class BillyExample {
 
     @AutoWired
-    private XenaClient client;
+    private BillyClient client;
     
     @PostConstruct
     private void init() {
@@ -66,7 +65,7 @@ public class XenaExample {
 ```
 
 
-See [Test.java](https://github.com/xenabiz/xena-java/blob/master/src/test/java/dk/xena/Test.java) for more examples.
+See [Test.java](https://github.com/Previsto/billy-java/blob/master/src/test/java/com/previsto/Test.java) for more examples.
 
 Testing
 =======
