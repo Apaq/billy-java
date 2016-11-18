@@ -2,15 +2,12 @@ package com.previsto.repository;
 
 import com.previsto.exception.RequestException;
 import com.previsto.model.Entity;
-import com.previsto.model.Fiscal;
 import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
@@ -23,7 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class Resource<T extends Persistable<Long>> {
+public class Resource<T extends Persistable<String>> {
 
     private static final Logger LOG = LoggerFactory.getLogger(Resource.class);
     protected final RestTemplate restTemplate;
@@ -106,7 +103,7 @@ public class Resource<T extends Persistable<Long>> {
         return false;
     }
 
-    public T get(long id) {
+    public T get(String id) {
         URI uri = buildUri(id);
         T entity = (T) restTemplate.getForObject(uri, clazz);
         if(entity != null) {
@@ -126,7 +123,7 @@ public class Resource<T extends Persistable<Long>> {
         delete(e.getId());
     }
 
-    public void delete(long id) {
+    public void delete(String id) {
         restTemplate.delete(buildUri(id));
     }
 
@@ -155,7 +152,7 @@ public class Resource<T extends Persistable<Long>> {
         return this.buildUri(null);
     }
 
-    protected URI buildUri(Long id) {
+    protected URI buildUri(String id) {
         try {
             String url = fiscalUrl + resolveServicePath(id);
             return new URI(url);
@@ -165,11 +162,11 @@ public class Resource<T extends Persistable<Long>> {
         }
     }
 
-    protected String resolveServicePath(Long id) {
+    protected String resolveServicePath(String id) {
         return resolveServicePath(id, false);
     }
     
-    protected String resolveServicePath(Long id, boolean ignoreParentPath) {
+    protected String resolveServicePath(String id, boolean ignoreParentPath) {
         String path = ignoreParentPath ? "" : servicePath;
         if (id == null) {
             path += "/" + resourceName;

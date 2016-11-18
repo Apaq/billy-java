@@ -26,13 +26,10 @@ public class BillyClientAutoConfigurationTest {
     @Test
     public void defaultNativeConnectionFactory() {
         load(EmptyConfiguration.class, 
-                "xena.serviceUrl=http://test.xena.biz/Api", 
-                "xena.blobUrl=http://test.xena.biz/Blob",
-                "xena.apiKey=qwerty123", 
-                "xena.fiscalId=12345");
+                "billy.serviceUrl=https://api.billysbilling.com/v2", 
+                "billy.apiKey=qwerty123");
         BillyClient client = this.context.getBean(BillyClient.class);
         assertEquals("qwerty123", client.getApiKey());
-        assertEquals(12345L, client.getFiscalId());
     }
 
     @Configuration

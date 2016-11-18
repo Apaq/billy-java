@@ -24,9 +24,9 @@ public class BillyClientAutoConfiguration {
     private BillyClientFactory clientFactory;
     
     @Bean
-    public BillyClient xenaClient() {
+    public BillyClient billyClient() {
         String displayKey = properties.getApiKey() != null ? "Not NULL" : "NULL";
-        LOG.info("Initializing XenaClient. [apiKey={}; fiscalId={}]", displayKey, properties.getFiscalId());
-        return clientFactory.create(properties.getApiKey(), properties.getFiscalId());
+        LOG.info("Initializing XenaClient. [apiKey={}]", displayKey);
+        return clientFactory.create(properties.getApiKey());
     }
 }

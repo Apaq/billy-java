@@ -1,18 +1,10 @@
 package com.previsto;
 
-import com.previsto.BillyClient;
-import com.previsto.model.Address;
-import com.previsto.model.OrderInvoiceTransaction;
-import com.previsto.model.Partner;
-import com.previsto.model.Subscription;
-import com.previsto.model.SubscriptionLine;
-import java.time.LocalDate;
-
 public class Test {
 
     public static void main(String[] args) {
         
-        BillyClient client = new BillyClient(10926, "6082ebbc-0447-4c62-adcf-cd77ebe14ada", "https://test.xena.biz/Api");
+        BillyClient client = new BillyClient("6082ebbc-0447-4c62-adcf-cd77ebe14ada", "https://test.xena.biz/Api");
         
         /*Partner partner = new Partner();
         partner.setAddress(new Address("Pudserman A/S", "Samsøgade 20", "9000", "aalborg", "DK"));
@@ -33,7 +25,7 @@ public class Test {
         client.getSubscriptionResource().delete(sub);
         client.getPartnerResource().delete(partner);*/
                 
-        OrderInvoiceTransaction oit = client.getOrderInvoiceTransactionResource().get(11085154);
-        System.out.println(oit);
+        //OrderInvoiceTransaction oit = client.getOrderInvoiceTransactionResource().get(11085154);
+        //System.out.println(oit);
     }
 }

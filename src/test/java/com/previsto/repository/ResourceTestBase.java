@@ -2,7 +2,7 @@ package com.previsto.repository;
 
 import com.previsto.repository.Resource;
 import com.previsto.ErrorHandler;
-import com.previsto.model.Fiscal;
+import com.previsto.model.Entity;
 import com.previsto.net.RestTemplateHelper;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
-public abstract class ResourceTestBase<T extends Fiscal> {
+public abstract class ResourceTestBase<T extends Entity> {
 
     private MockRestServiceServer mockServer;
     private final Resource<T> resource;
@@ -78,7 +78,7 @@ public abstract class ResourceTestBase<T extends Fiscal> {
     @Test
     public void testGet() {
         System.out.println("get");
-        long id = 42L;
+        String id = "42L";
         
         mockServer.expect(requestTo(resource.fiscalUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedGetResponse());
@@ -91,7 +91,7 @@ public abstract class ResourceTestBase<T extends Fiscal> {
     @Test
     public void testGetNotFound() {
         System.out.println("get");
-        long id = -1L;
+        String id = null;
         
         mockServer.expect(requestTo(resource.fiscalUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.NOT_FOUND));
@@ -103,7 +103,7 @@ public abstract class ResourceTestBase<T extends Fiscal> {
     @Test
     public void testSave() {
         System.out.println("save");
-        long id = 42L;
+        String id = "42L";
         
         mockServer.expect(requestTo(resource.fiscalUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedGetResponse());

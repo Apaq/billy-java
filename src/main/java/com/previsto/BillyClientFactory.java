@@ -12,7 +12,7 @@ public class BillyClientFactory {
         return serviceUrl;
     }
     
-    public BillyClient create(String apiKey, long fiscalId) {
-        return new BillyClient(fiscalId, apiKey, serviceUrl);
+    public BillyClient create(String apiKey) {
+        return new BillyClient(apiKey, serviceUrl);
     }
 }

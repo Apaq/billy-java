@@ -13,11 +13,6 @@ public class BillyProperties {
     private String apiKey;
 
     /**
-     * The fiscal id for billy.
-     */
-    private Long fiscalId;
-
-    /**
      * The API url for billy.
      */
     private String serviceUrl;
@@ -45,12 +40,6 @@ public class BillyProperties {
         this.apiKey = apiKey;
     }
 
-    public Long getFiscalId() {
-        return fiscalId;
-    }
 
-    public void setFiscalId(Long fiscalId) {
-        this.fiscalId = fiscalId;
-    }
 
 }

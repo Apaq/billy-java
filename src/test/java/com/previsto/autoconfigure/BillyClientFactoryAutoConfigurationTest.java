@@ -23,9 +23,9 @@ public class BillyClientFactoryAutoConfigurationTest {
 
     @Test
     public void defaultNativeConnectionFactory() {
-        load(EmptyConfiguration.class, "xena.serviceUrl=http://test.xena.biz/Api", "xena.blobUrl=http://test.xena.biz/Blob");
+        load(EmptyConfiguration.class, "billy.serviceUrl=https://api.billysbilling.com/v2");
         BillyClientFactory factory = this.context.getBean(BillyClientFactory.class);
-        assertEquals("http://test.xena.biz/Api", factory.getServiceUrl());
+        assertEquals("https://api.billysbilling.com/v2", factory.getServiceUrl());
     }
 
     @Configuration

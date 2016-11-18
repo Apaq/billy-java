@@ -18,7 +18,7 @@ public class BillyHealthIndicator implements HealthIndicator {
     @Override
     public Health health() {
         try {
-            client.getSubscriptionResource().findAll(new PageRequest(0, 1), false, false);
+            //client.getSubscriptionResource().findAll(new PageRequest(0, 1), false, false);
             return Health.up()
                     .withDetail("serviceUrl", client.getServiceUrl())
                     .build();
