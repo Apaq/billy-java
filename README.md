@@ -102,5 +102,3 @@ You set it up like this:
 </settings>
 ```
 
-
-# billy-java
