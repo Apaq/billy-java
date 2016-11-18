@@ -1,0 +1,93 @@
+{
+  "Count": 2,
+  "Entities": [
+    {
+      "Version": 1,
+      "IsDeactivated": false,
+      "FiscalSetupId": 10926,
+      "CreatedAt": "2016-02-05T08:38:00Z",
+      "CreatedBy": 11025766,
+      "AdditionalArticles": [],
+      "ArticleNumber": "skveege_annually",
+      "HasVariants": false,
+      "PurchasingSetup": {
+        "DefaultQuantity": 1,
+        "DefaultUnitId": null
+      },
+      "Description": "Årligt abonnement på Skveege",
+      "SalesSetup": {
+        "DefaultQuantity": 12,
+        "DefaultUnitId": null
+      },
+      "GroupId": 11026372,
+      "PartnerSupplierContextId": null,
+      "SupplierAccountNumber": null,
+      "SupplierName": null,
+      "SupplierId": null,
+      "AverageCostPrice": null,
+      "MinimumStock": null,
+      "MaximumStock": null,
+      "HasInventoryManagement": false,
+      "HasSerialNumber": null,
+      "HasBatchNumber": null,
+      "ArticleGroupDescription": "Diverse",
+      "SalesUnitAbbreviation": null,
+      "PurchasingUnitAbbreviation": null,
+      "DefaultLocationId": null,
+      "DefaultLocationAbbreviation": null,
+      "PurchasePrice": null,
+      "PurchaseCurrencyAbbreviation": null,
+      "SalesPrice": 99,
+      "SalesCurrencyAbbreviation": "DKK",
+      "AdvancedSalesPrices": false,
+      "AdvancedPurchasePrices": false,
+      "DescriptionFriendly": "skveege_annually - Årligt abonnement på Skveege",
+      "IsBundle": false,
+      "Id": 42
+    },
+    {
+      "Version": 3,
+      "IsDeactivated": false,
+      "FiscalSetupId": 10926,
+      "CreatedAt": "2016-02-05T08:14:56Z",
+      "CreatedBy": null,
+      "AdditionalArticles": [],
+      "ArticleNumber": "skveege_monthly",
+      "HasVariants": false,
+      "PurchasingSetup": {
+        "DefaultQuantity": 1,
+        "DefaultUnitId": 11026069
+      },
+      "Description": "Månedligt abonnement på Skveege",
+      "SalesSetup": {
+        "DefaultQuantity": 1,
+        "DefaultUnitId": 11026069
+      },
+      "GroupId": 11026372,
+      "PartnerSupplierContextId": null,
+      "SupplierAccountNumber": null,
+      "SupplierName": null,
+      "SupplierId": null,
+      "AverageCostPrice": null,
+      "MinimumStock": null,
+      "MaximumStock": null,
+      "HasInventoryManagement": false,
+      "HasSerialNumber": null,
+      "HasBatchNumber": null,
+      "ArticleGroupDescription": "Diverse",
+      "SalesUnitAbbreviation": "stk",
+      "PurchasingUnitAbbreviation": "stk",
+      "DefaultLocationId": null,
+      "DefaultLocationAbbreviation": null,
+      "PurchasePrice": 0,
+      "PurchaseCurrencyAbbreviation": "DKK",
+      "SalesPrice": 129,
+      "SalesCurrencyAbbreviation": "DKK",
+      "AdvancedSalesPrices": false,
+      "AdvancedPurchasePrices": false,
+      "DescriptionFriendly": "skveege_monthly - Månedligt abonnement på Skveege",
+      "IsBundle": false,
+      "Id": 43
+    }
+  ]
+}
