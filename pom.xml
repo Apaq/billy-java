@@ -13,10 +13,10 @@
     </parent>
     
     <scm>
-        <connection>scm:git:https://github.com/xenabiz/xena-java.git</connection>
-        <developerConnection>scm:git:git@github.com:xenabiz/xena-java.git</developerConnection>
-        <url>https://github.com/xenabiz/xena-java</url>
-        <tag>sirp-1.3.5</tag>
+        <connection>scm:git:https://github.com/Previsto/billy-java.git</connection>
+        <developerConnection>scm:git:git@github.com:Previsto/billy-java.git</developerConnection>
+        <url>https://github.com/Previsto/billy-java</url>
+        
     </scm>
 
     
