@@ -33,7 +33,6 @@ application.yml
 billy:
   serviceUrl: http://billy.dk/api
   apiKey: YOUR_API_KEY
-  fiscalId: YOUR_FISCAL_ID
 ```
 
 BillyExample.java
