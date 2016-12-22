@@ -1,18 +1,21 @@
 package com.previsto.repository;
 
 import com.previsto.exception.RequestException;
+import com.previsto.exception.UnknownException;
+import com.previsto.mapping.PersistMapping;
+import com.previsto.mapping.PluralMapping;
+import com.previsto.mapping.SingularMapping;
 import com.previsto.model.Entity;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Persistable;
 import org.springframework.http.HttpMethod;
@@ -20,96 +23,70 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class Resource<T extends Persistable<String>> {
+public abstract class Resource<T extends Persistable<String>> {
 
     private static final Logger LOG = LoggerFactory.getLogger(Resource.class);
     protected final RestTemplate restTemplate;
-    protected final String fiscalUrl;
-    protected final String servicePath;
-    protected Class<T> clazz;
+    protected final String serviceUrl;
+    protected Class<? extends SingularMapping<T>> singularClass;
+    protected Class<? extends PersistMapping<T>> persistClass;
+    protected Class<? extends PluralMapping<T>> pluralClass;
     protected String resourceName;
+    protected Map<String, String> sideloadParams;
 
-    public Resource(Class<T> clazz, String resourceName, RestTemplate restTemplate, String fiscalUrl) {
-        this(clazz, resourceName, restTemplate, fiscalUrl, null);
-    }
-
-    public Resource(Class<T> clazz, String resourceName, RestTemplate restTemplate, String fiscalUrl, String servicePath) {
-        this.clazz = clazz;
+    public Resource(Class<? extends SingularMapping<T>> singularClass, Class<? extends PluralMapping<T>> pluralClass, 
+            Class<? extends PersistMapping<T>> persistClass, String resourceName, RestTemplate restTemplate, String serviceUrl, 
+            Map<String, String> sideloadParams) {
+        this.singularClass = singularClass;
+        this.pluralClass = pluralClass;
+        this.persistClass = persistClass;
         this.resourceName = resourceName;
         this.restTemplate = restTemplate;
-        this.fiscalUrl = fiscalUrl;
-        this.servicePath = servicePath == null ? "" : servicePath;
+        this.serviceUrl = serviceUrl;
+        this.sideloadParams = sideloadParams == null ? Collections.EMPTY_MAP : sideloadParams;
     }
 
     public List<T> findAll() {
         return findAll(null).getContent();
     }
 
-    public List<T> findAll(boolean includeRelations) {
-        return findAll(null, false, includeRelations).getContent();
-    }
-
     public Page<T> findAll(PageRequest pageRequest) {
-        return findAll(pageRequest, false, false);
-    }
-
-    public Page<T> findAll(PageRequest pageRequest, boolean includeDeactived, boolean includeRelations) {
         URI url = buildUri();
         ParameterizedTypeReference<List<T>> responseType = new ParameterizedTypeReference<List<T>>() {
             @Override
             public Type getType() {
-                return Array.newInstance(clazz, 0).getClass();
+                return pluralClass;
             }
         };
 
         UriComponentsBuilder builder = UriComponentsBuilder.fromUri(url);
         if (pageRequest != null) {
-            builder.queryParam("Page", pageRequest.getPageNumber());
-            builder.queryParam("PageSize", pageRequest.getPageSize());
-        } else {
-            builder.queryParam("ForceNoPaging", true);
+            builder.queryParam("page", pageRequest.getPageNumber() + 1);
+            builder.queryParam("pageSize", pageRequest.getPageSize());
         }
-
-        if (includeDeactived) {
-            builder.queryParam("ShowDeactivated", true);
+        
+        for (Map.Entry<String, String> entry : sideloadParams.entrySet()) {
+            builder.queryParam(entry.getKey(), entry.getValue());
         }
 
         url = builder.build().encode().toUri();
         ResponseEntity resp = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
-        T[] result = (T[]) resp.getBody();
-        int count = -1;
-
-        if (resp.getHeaders().getFirst("Count") != null) {
-            try {
-                count = Integer.parseInt(resp.getHeaders().getFirst("Count"));
-            } catch (NumberFormatException ex) {
-                LOG.info("Unable to parse count.", ex);
-            }
-        }
-
-        if (includeRelations) {
-            for (T entity : result) {
-                loadRelations(entity);
-            }
-        }
-
-        return new PageImpl<>(Arrays.asList(result), pageRequest, count);
-    }
-
-    protected void loadRelations(T entity) {
-    }
-
-    protected boolean saveRelations(T entity, T orgEntity) {
-        return false;
+        PluralMapping<T> result = (PluralMapping<T>) resp.getBody();
+        
+        return result.getPage();
     }
 
     public T get(String id) {
-        URI uri = buildUri(id);
-        T entity = (T) restTemplate.getForObject(uri, clazz);
-        if(entity != null) {
-            loadRelations(entity);
+        URI url = buildUri(id);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUri(url);
+        
+        for (Map.Entry<String, String> entry : sideloadParams.entrySet()) {
+            builder.queryParam(entry.getKey(), entry.getValue());
         }
-        return entity;
+
+        url = builder.build().encode().toUri();
+        SingularMapping<T> result = (SingularMapping<T>) restTemplate.getForObject(url, singularClass);
+        return result.getEntity();
     }
 
     public void delete(T entity) {
@@ -131,20 +108,26 @@ public class Resource<T extends Persistable<String>> {
         if(!(entity instanceof Entity)) {
             throw new RequestException("Entity cannot be persisted.");
         }
-            
-        Entity e = (Entity) entity;
-        URI uri = buildUri(e.getId());
+        
+        PersistMapping<T> mapping = null;
+        try {
+            mapping = persistClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException ex) {
+            throw new UnknownException("Unable to create instance of singularClass");
+        }
+        
+        mapping.setEntity(entity);
+        URI uri = buildUri(entity.getId());
         T persistedEntity;
         
-        if(e.getId() == null) {
-            ResponseEntity<T> response = restTemplate.postForEntity(uri, entity, clazz);
-            persistedEntity = response.getBody();
+        if(entity.getId() == null) {
+            ResponseEntity<? extends PluralMapping<T>> response = restTemplate.postForEntity(uri, mapping, pluralClass);
+            persistedEntity = response.getBody().getPage().getContent().get(0);
         } else {
-            restTemplate.put(uri, entity);
+            restTemplate.put(uri, mapping);
             persistedEntity = entity;
         }
         
-        saveRelations(persistedEntity, entity);
         return persistedEntity;
     }
 
@@ -154,7 +137,10 @@ public class Resource<T extends Persistable<String>> {
 
     protected URI buildUri(String id) {
         try {
-            String url = fiscalUrl + resolveServicePath(id);
+            String url = serviceUrl + "/" + resourceName;
+            if(id != null) {
+                url += "/" + id;
+            }
             return new URI(url);
         } catch (URISyntaxException ex) {
             LOG.error("URI invalid.", ex);
@@ -162,18 +148,5 @@ public class Resource<T extends Persistable<String>> {
         }
     }
 
-    protected String resolveServicePath(String id) {
-        return resolveServicePath(id, false);
-    }
     
-    protected String resolveServicePath(String id, boolean ignoreParentPath) {
-        String path = ignoreParentPath ? "" : servicePath;
-        if (id == null) {
-            path += "/" + resourceName;
-        } else {
-            path += "/" + resourceName + "/" + id;
-        }
-        return path;
-    }
-
 }

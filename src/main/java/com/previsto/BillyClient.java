@@ -1,6 +1,9 @@
 package com.previsto;
 
+import com.previsto.model.Contact;
 import com.previsto.net.RestTemplateHelper;
+import com.previsto.repository.ContactResource;
+import com.previsto.repository.Resource;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collections;
@@ -17,7 +20,7 @@ public class BillyClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(BillyClient.class);
     public static final LocalDate EPOCH = LocalDate.of(1970, Month.JANUARY, 1);
-    private static final String XENA_API_KEY_HEADER = "X-Access-Token";
+    private static final String API_KEY_HEADER = "X-Access-Token";
 
     private final RestTemplate restTemplate;
     private final String serviceUrl;
@@ -31,7 +34,7 @@ public class BillyClient {
         this.serviceUrl = serviceUrl;
         this.apiKey = apiKey;
 
-        RestTemplateHelper.configureForXenaJargon(restTemplate);
+        //RestTemplateHelper.configureForBillyJargon(restTemplate);
 
         
         //Apply default timeouts
@@ -39,7 +42,7 @@ public class BillyClient {
         this.requestFactory.setReadTimeout(10000);
         
         // Apply security
-        Header tokenHeader = new BasicHeader(XENA_API_KEY_HEADER, apiKey);
+        Header tokenHeader = new BasicHeader(API_KEY_HEADER, apiKey);
         HttpClient httpClient = HttpClients.custom().setDefaultHeaders(Collections.singleton(tokenHeader)).build();
         this.requestFactory.setHttpClient(httpClient);
     }
@@ -52,13 +55,6 @@ public class BillyClient {
         this.requestFactory.setReadTimeout(millis);
     }
     
-    private String appendFiscalPath(String url) {
-        if(!url.endsWith("/")) {
-            url = url + "/";
-        }
-        return url;
-    }
-
     public String getApiKey() {
         return apiKey;
     }
@@ -67,9 +63,9 @@ public class BillyClient {
         return serviceUrl;
     }
 
-    /*public Resource<Article> getArticleResource() {
-        return new Resource<>(Article.class, "Article", restTemplate, appendFiscalPath(serviceUrl));
+    public ContactResource getContactResource() {
+        return new ContactResource(restTemplate, serviceUrl);
     }
     
-    */
+    
 }
