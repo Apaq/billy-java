@@ -5,19 +5,11 @@ import com.previsto.model.Contact;
 import com.previsto.model.ZipCode;
 import java.util.List;
 
-public abstract class ContactMapping {
+public abstract class ContactMapping extends BaseMapping<Contact> {
  
-    private ResponseMeta meta;
     private List<City> cities;
     private List<ZipCode> zipcodes;
 
-    public ResponseMeta getMeta() {
-        return meta;
-    }
-
-    public void setMeta(ResponseMeta meta) {
-        this.meta = meta;
-    }
 
     public List<City> getCities() {
         return cities;

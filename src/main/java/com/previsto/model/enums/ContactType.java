@@ -1,4 +1,4 @@
-package com.previsto.model;
+package com.previsto.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

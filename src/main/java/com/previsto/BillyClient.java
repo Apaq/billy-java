@@ -3,6 +3,7 @@ package com.previsto;
 import com.previsto.model.Contact;
 import com.previsto.net.RestTemplateHelper;
 import com.previsto.repository.ContactResource;
+import com.previsto.repository.InvoiceResource;
 import com.previsto.repository.Resource;
 import java.time.LocalDate;
 import java.time.Month;
@@ -65,6 +66,10 @@ public class BillyClient {
 
     public ContactResource getContactResource() {
         return new ContactResource(restTemplate, serviceUrl);
+    }
+    
+    public InvoiceResource getInvoiceResource() {
+        return new InvoiceResource(restTemplate, serviceUrl);
     }
     
     

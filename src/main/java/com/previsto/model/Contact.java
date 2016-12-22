@@ -1,5 +1,6 @@
 package com.previsto.model;
 
+import com.previsto.model.enums.ContactType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Contact extends Entity {

@@ -1,7 +1,8 @@
 package com.previsto;
 
 import com.previsto.model.Contact;
-import com.previsto.model.ContactType;
+import com.previsto.model.Invoice;
+import com.previsto.model.enums.ContactType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -37,5 +38,9 @@ public class Test {
         contact = client.getContactResource().save(contact);
                 //client.getContactResource().get("X1rMtELASOi9K5bJvkmXZQ");
         System.out.println(contact);
+        
+        
+        Invoice invoice = client.getInvoiceResource().get("bu5kT3faT5WASbLYaa5Mwg");
+        System.out.println(invoice);
     }
 }
