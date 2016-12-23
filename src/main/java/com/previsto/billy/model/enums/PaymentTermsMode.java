@@ -7,5 +7,10 @@ public enum PaymentTermsMode {
     @JsonProperty("unknown")
     Unknown,
     @JsonProperty("date")
-    Date
+    Date,
+    @JsonProperty("netEndOfMonth")
+    NetEndOfMonth,
+    @JsonProperty("net")
+    Net
+    
 }

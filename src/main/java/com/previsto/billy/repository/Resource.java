@@ -86,7 +86,7 @@ public abstract class Resource<T extends Persistable<String>> {
 
         url = builder.build().encode().toUri();
         SingularMapping<T> result = (SingularMapping<T>) restTemplate.getForObject(url, singularClass);
-        return result.getEntity();
+        return result == null ? null : result.getEntity();
     }
 
     public void delete(T entity) {

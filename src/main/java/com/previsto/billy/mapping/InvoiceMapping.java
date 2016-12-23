@@ -19,4 +19,6 @@ public abstract class InvoiceMapping extends BaseMapping<Invoice> {
     protected void resolveExtraData(Invoice invoice) {
         invoice.setLines(getLines());
     }
+    
+    
 }

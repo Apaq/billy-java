@@ -1,20 +1,19 @@
 package com.previsto.billy.exception;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public abstract class BillyException extends RuntimeException {
 
-    @JsonProperty(value = "StatusCode")
-    private Integer statusCode;
-
-    public BillyException(String message, Integer statusCode) {
+    private String errorCode;
+    private ExceptionMeta meta;
+    
+    public BillyException(String message, String errorCode, ExceptionMeta meta) {
         super(message, null);
-        this.statusCode = statusCode;
+        this.errorCode = errorCode;
+        this.meta = meta;
     }
 
-    public BillyException(String message, Integer statusCode, Throwable e) {
+    public BillyException(String message, String errorCode, Throwable e) {
         super(message, e);
-        this.statusCode = statusCode;
+        this.errorCode = errorCode;
     }
 
     public BillyException(String message) {
@@ -27,12 +26,14 @@ public abstract class BillyException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getStatusCode() {
-        return statusCode;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setStatusCode(Integer statusCode) {
-        this.statusCode = statusCode;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
+
+    
 
 }

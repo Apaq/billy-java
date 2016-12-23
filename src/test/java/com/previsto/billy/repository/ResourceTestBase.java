@@ -1,17 +1,8 @@
 package com.previsto.billy.repository;
 
-import com.previsto.billy.repository.Resource;
 import com.previsto.billy.ErrorHandler;
 import com.previsto.billy.model.Entity;
-import com.previsto.billy.net.RestTemplateHelper;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -44,17 +35,8 @@ public abstract class ResourceTestBase<T extends Entity> {
         mockServer = MockRestServiceServer.createServer(restTemplate);
     }
     
-    protected String readResourceFromFile(String name) {
-        InputStream is = getClass().getResourceAsStream(name);
-        try (BufferedReader buffer = new BufferedReader(new InputStreamReader(is))) {
-            return buffer.lines().collect(Collectors.joining("\n"));
-        }
-        catch (IOException ex) {
-            Logger.getLogger(ResourceTestBase.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-    
+    protected abstract String generateSingularId();
+    protected abstract String generateExpectedGetQueryParams();
     protected abstract DefaultResponseCreator generateExpectedGetResponse();
     protected abstract DefaultResponseCreator generateExpectedFindAllResponse();
     
@@ -65,7 +47,8 @@ public abstract class ResourceTestBase<T extends Entity> {
     @Test
     public void testFindAll() {
         System.out.println("findAll");
-        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "?ForceNoPaging=true")).andExpect(method(HttpMethod.GET))
+        String queryParams = generateExpectedGetQueryParams();
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + queryParams)).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedFindAllResponse());
         List<T> entities = resource.findAll();
         for(T entity : entities) {
@@ -78,9 +61,10 @@ public abstract class ResourceTestBase<T extends Entity> {
     @Test
     public void testGet() {
         System.out.println("get");
-        String id = "42L";
+        String id = generateSingularId();
         
-        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
+        String queryParams = generateExpectedGetQueryParams();
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id + queryParams)).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedGetResponse());
         T entity = resource.get(id);
         doCheckEntity(entity);
@@ -91,9 +75,10 @@ public abstract class ResourceTestBase<T extends Entity> {
     @Test
     public void testGetNotFound() {
         System.out.println("get");
-        String id = null;
+        String id = "NONE";
         
-        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
+        String queryParams = generateExpectedGetQueryParams();
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id + queryParams)).andExpect(method(HttpMethod.GET))
                 .andRespond(withStatus(HttpStatus.NOT_FOUND));
         T entity = resource.get(id);
         assertNull(entity);
@@ -103,9 +88,10 @@ public abstract class ResourceTestBase<T extends Entity> {
     @Test
     public void testSave() {
         System.out.println("save");
-        String id = "42L";
+        String id = generateSingularId();
         
-        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.GET))
+        String queryParams = generateExpectedGetQueryParams();
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id + queryParams)).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedGetResponse());
         mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.PUT)).andExpect(generateExpectedSaveRequest())
                 .andRespond(generateExpectedGetResponse());
@@ -118,7 +104,7 @@ public abstract class ResourceTestBase<T extends Entity> {
     
     public static RestTemplate buildRestTemplate() {
         RestTemplate rt = new RestTemplate();
-        RestTemplateHelper.configureForBillyJargon(rt);
+        //RestTemplateHelper.configureForBillyJargon(rt);
         return rt;
     }
 }
