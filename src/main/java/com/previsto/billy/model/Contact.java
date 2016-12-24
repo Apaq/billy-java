@@ -3,7 +3,7 @@ package com.previsto.billy.model;
 import com.previsto.billy.model.enums.ContactType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Contact extends Entity {
+public class Contact extends ArchivableEntity {
 
     private ContactType type;
     private String name;

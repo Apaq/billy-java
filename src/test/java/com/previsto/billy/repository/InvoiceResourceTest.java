@@ -44,19 +44,16 @@ public class InvoiceResourceTest extends ResourceTestBase<Invoice> {
     @Override
     protected void doCheckEntity(Invoice entity) {
         if ("UdsHDvAESV2eCZHSCYOfzA".equals(entity.getId())) {
-            assertEquals(false, entity.isArchived());
             assertEquals(LocalDateTime.parse("2016-12-23T08:18:20"), entity.getCreatedTime());
             return;
         }
 
         if ("cSHBqWWITexZvQy29lqpYg".equals(entity.getId())) {
-            assertEquals(false, entity.isArchived());
             assertEquals(LocalDateTime.parse("2016-12-23T08:16:46"), entity.getCreatedTime());
             return;
         }
 
         if ("o9bpexuzTb25IfEgW7E1Wg".equals(entity.getId())) {
-            assertEquals(false, entity.isArchived());
             assertEquals(LocalDateTime.parse("2016-12-23T08:13:48"), entity.getCreatedTime());
             return;
         }

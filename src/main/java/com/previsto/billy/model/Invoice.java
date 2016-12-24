@@ -1,5 +1,7 @@
 package com.previsto.billy.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.previsto.billy.model.enums.InvoiceSentState;
 import com.previsto.billy.model.enums.InvoiceState;
@@ -15,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Invoice extends Entity {
     private float amount;
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     protected LocalDateTime approvedTime; 
     private String attContactPersonId;
     private float balance;
@@ -24,7 +26,9 @@ public class Invoice extends Entity {
     private String creditedInvoiceId;
     private String currencyId;
     private String downloadUrl;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate entryDate;
     private float exchangeRate;
     private String invoiceNo;
@@ -33,7 +37,7 @@ public class Invoice extends Entity {
     private String lineDescription;
     private String orderNo;
     private int paymentTermsDays;
-    private PaymentTermsMode paymentTermsMode = PaymentTermsMode.Unknown;
+    private PaymentTermsMode paymentTermsMode = PaymentTermsMode.Net;
     private String recurringInvoiceId;
     private InvoiceSentState sentState = InvoiceSentState.Unsent;
     private InvoiceState state = InvoiceState.Draft;
@@ -70,6 +74,7 @@ public class Invoice extends Entity {
         this.attContactPersonId = attContactPersonId;
     }
 
+    @JsonIgnore
     public float getBalance() {
         return balance;
     }
@@ -126,6 +131,7 @@ public class Invoice extends Entity {
         this.dueDate = dueDate;
     }
 
+    @JsonIgnore
     public LocalDate getEntryDate() {
         return entryDate;
     }
@@ -150,6 +156,7 @@ public class Invoice extends Entity {
         this.invoiceNo = invoiceNo;
     }
 
+    @JsonIgnore
     public boolean isPaid() {
         return paid;
     }
@@ -190,6 +197,7 @@ public class Invoice extends Entity {
         this.paymentTermsMode = paymentTermsMode;
     }
 
+    @JsonIgnore
     public String getRecurringInvoiceId() {
         return recurringInvoiceId;
     }
@@ -214,6 +222,7 @@ public class Invoice extends Entity {
         this.state = state;
     }
 
+    @JsonIgnore
     public float getTax() {
         return tax;
     }
@@ -238,6 +247,7 @@ public class Invoice extends Entity {
         this.lines = lines;
     }
 
+    
     public List<InvoiceAttachment> getAttachments() {
         return attachments;
     }
@@ -246,6 +256,7 @@ public class Invoice extends Entity {
         this.attachments = attachments;
     }
 
+    @JsonIgnore
     public List<InvoiceLateFee> getLateFees() {
         return lateFees;
     }
@@ -254,6 +265,7 @@ public class Invoice extends Entity {
         this.lateFees = lateFees;
     }
 
+    @JsonIgnore
     public List<BalanceModifier> getBalanceModifiers() {
         return balanceModifiers;
     }

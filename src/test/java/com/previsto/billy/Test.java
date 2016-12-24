@@ -1,11 +1,10 @@
 package com.previsto.billy;
 
-import com.previsto.billy.BillyClient;
 import com.previsto.billy.model.Contact;
 import com.previsto.billy.model.Invoice;
+import com.previsto.billy.model.InvoiceLine;
 import com.previsto.billy.model.enums.ContactType;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import com.previsto.billy.model.enums.DiscountMode;
 
 public class Test {
 
@@ -13,35 +12,33 @@ public class Test {
         
         BillyClient client = new BillyClient("66d361eea7c89d4f9c4d56ef66b7e9bce20784e7", "https://api.billysbilling.com/v2");
         
-        /*Partner partner = new Partner();
-        partner.setAddress(new Address("Pudserman A/S", "Samsøgade 20", "9000", "aalborg", "DK"));
-        partner = client.getPartnerResource().save(partner);
-        
-        Subscription sub = new Subscription();
-        sub.setDescription("Månedligt abonnement på Skveege");
-        sub.setCustomerId(partner.getId());
-        sub.setNextRunDate(LocalDate.now().plusMonths(1).withDayOfMonth(1));
-        
-        SubscriptionLine line = new SubscriptionLine();
-        line.setDescription("Månedligt abonnement på Skveege");
-        line.setArticleId(11026473L);
-        
-        sub.getSubscriptionLines().add(line);
-        sub = client.getSubscriptionResource().save(sub);
-        
-        client.getSubscriptionResource().delete(sub);
-        client.getPartnerResource().delete(partner);*/
-         
         
         //Page<Contact> contacts = client.getContactResource().findAll(new PageRequest(0, 2));
         Contact contact = new Contact(ContactType.Company, "Apaq", "DK");
         contact.setSupplier(true);
+        
+        // Create
+        contact = client.getContactResource().save(contact);
+        // Update
         contact = client.getContactResource().save(contact);
                 //client.getContactResource().get("X1rMtELASOi9K5bJvkmXZQ");
         System.out.println(contact);
         
         
-        Invoice invoice = client.getInvoiceResource().get("bu5kT3faT5WASbLYaa5Mwg");
+        Invoice invoice = new Invoice();
+        invoice.setContactId(contact.getId());
+        invoice.setCurrencyId("DKK");
+        InvoiceLine line = new InvoiceLine();
+        line.setAmount(200);
+        line.setDescription("Test");
+        line.setDiscountValue(200);
+        line.setDiscountMode(DiscountMode.CashDiscount);
+        invoice.getLines().add(line);
+        invoice = client.getInvoiceResource().save(invoice);
+        invoice = client.getInvoiceResource().save(invoice);
         System.out.println(invoice);
+        client.getInvoiceResource().delete(invoice);
+        client.getContactResource().delete(contact);
+        
     }
 }
