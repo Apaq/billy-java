@@ -1,10 +1,14 @@
 package com.previsto.billy;
 
+import com.previsto.billy.model.Account;
 import com.previsto.billy.model.Contact;
 import com.previsto.billy.model.Invoice;
 import com.previsto.billy.model.InvoiceLine;
+import com.previsto.billy.model.Product;
 import com.previsto.billy.model.enums.ContactType;
 import com.previsto.billy.model.enums.DiscountMode;
+import java.util.List;
+import javafx.scene.control.Accordion;
 
 public class Test {
 
@@ -24,21 +28,39 @@ public class Test {
                 //client.getContactResource().get("X1rMtELASOi9K5bJvkmXZQ");
         System.out.println(contact);
         
+        Account account = null;
+        List<Account> accounts = client.getAccountResource().findAll();
+        for(Account current : accounts) {
+            if(current.getNatureId().equals("revenue") && current.getAccountNo() == 1110) {
+                account = current;
+                break;
+            }
+            
+            if(current.getNatureId().equals("revenue")) {
+                account = current;
+            }
+        }
+        Product product = new Product();
+        product.setName("Vinduespolering");
+        product.setProductNo("WC_PREVISTO");
+        product.setAccountId(account.getId());
+        product = client.getProductResource().save(product);
         
         Invoice invoice = new Invoice();
         invoice.setContactId(contact.getId());
         invoice.setCurrencyId("DKK");
         InvoiceLine line = new InvoiceLine();
-        line.setAmount(200);
+        line.setUnitPrice(200);
         line.setDescription("Test");
-        line.setDiscountValue(200);
-        line.setDiscountMode(DiscountMode.CashDiscount);
+        //line.setDiscountValue(0);
+        //line.setDiscountMode(DiscountMode.PercentageDiscount);
+        line.setProductId(product.getId());
         invoice.getLines().add(line);
         invoice = client.getInvoiceResource().save(invoice);
         invoice = client.getInvoiceResource().save(invoice);
         System.out.println(invoice);
-        client.getInvoiceResource().delete(invoice);
-        client.getContactResource().delete(contact);
+        //client.getInvoiceResource().delete(invoice);
+        //client.getContactResource().delete(contact);
         
     }
 }

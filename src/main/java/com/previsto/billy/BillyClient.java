@@ -1,10 +1,9 @@
 package com.previsto.billy;
 
-import com.previsto.billy.model.Contact;
-import com.previsto.billy.net.RestTemplateHelper;
+import com.previsto.billy.repository.AccountResource;
 import com.previsto.billy.repository.ContactResource;
 import com.previsto.billy.repository.InvoiceResource;
-import com.previsto.billy.repository.Resource;
+import com.previsto.billy.repository.ProductResource;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collections;
@@ -72,5 +71,11 @@ public class BillyClient {
         return new InvoiceResource(restTemplate, serviceUrl);
     }
     
+    public ProductResource getProductResource() {
+        return new ProductResource(restTemplate, serviceUrl);
+    }
     
+    public AccountResource getAccountResource() {
+        return new AccountResource(restTemplate, serviceUrl);
+    }
 }

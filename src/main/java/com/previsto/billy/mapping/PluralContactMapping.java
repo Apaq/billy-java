@@ -1,8 +1,5 @@
 package com.previsto.billy.mapping;
 
-import com.previsto.billy.exception.ApiException;
-import com.previsto.billy.exception.BillyException;
-import com.previsto.billy.exception.UnknownException;
 import com.previsto.billy.model.Contact;
 import java.util.List;
 import org.springframework.data.domain.Page;
@@ -23,17 +20,8 @@ public class PluralContactMapping extends ContactMapping implements PluralMappin
 
     @Override
     public Page<Contact> getPage() {
-        Paging paging = getMeta().getPaging();
-        Pageable pageable = null;
-        int total = -1;
-        if(paging != null) {
-            pageable = new PageRequest(paging.page - 1, paging.pageSize);
-            total = paging.total;
-        }
-        
         contacts.forEach(c -> resolveExtraData(c));
-        
-        return new PageImpl(contacts, pageable, total);
+        return BaseMapping.resolvePage(getMeta(), contacts);
     }
     
     

@@ -1,7 +1,9 @@
 package com.previsto.billy.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.previsto.billy.model.enums.ContactType;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
 
 public class Contact extends ArchivableEntity {
 
@@ -21,6 +23,9 @@ public class Contact extends ArchivableEntity {
     private String registrationNo;
     private String localeId;
     private String ean;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    protected LocalDateTime createdTime;
+    
 
     @JsonProperty("isCustomer")
     private boolean customer;
@@ -37,7 +42,14 @@ public class Contact extends ArchivableEntity {
         this.countryId = countryId;
     }
 
-    
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+    }
+
     public ContactType getType() {
         return type;
     }

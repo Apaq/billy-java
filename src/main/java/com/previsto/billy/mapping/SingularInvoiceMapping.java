@@ -5,7 +5,7 @@ import com.previsto.billy.model.Invoice;
 public class SingularInvoiceMapping extends InvoiceMapping implements SingularMapping<Invoice> {
     private Invoice invoice;
 
-    public Invoice getContact() {
+    public Invoice getInvoice() {
         return invoice;
     }
 

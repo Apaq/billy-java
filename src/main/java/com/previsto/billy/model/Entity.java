@@ -10,23 +10,12 @@ public abstract class Entity implements Persistable<String> {
 
     private String id;
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    protected LocalDateTime createdTime;
-    
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public LocalDateTime getCreatedTime() {
-        return createdTime;
-    }
-
-    public void setCreatedTime(LocalDateTime createdTime) {
-        this.createdTime = createdTime;
     }
 
     @Override

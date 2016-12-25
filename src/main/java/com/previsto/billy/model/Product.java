@@ -1,12 +1,17 @@
 package com.previsto.billy.model;
 
-public class Product extends Entity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Product extends ArchivableEntity {
     private String name;
     private String description;
-    private String account;
+    private String accountId;
     private String productNo;
     private String suppliersProductNo;
-
+    private String salesTaxRulesetId;
+    private List<ProductPrice> prices = new ArrayList<>();
+    
     public String getName() {
         return name;
     }
@@ -23,12 +28,20 @@ public class Product extends Entity {
         this.description = description;
     }
 
-    public String getAccount() {
-        return account;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getSalesTaxRulesetId() {
+        return salesTaxRulesetId;
+    }
+
+    public void setSalesTaxRulesetId(String salesTaxRulesetId) {
+        this.salesTaxRulesetId = salesTaxRulesetId;
     }
 
     public String getProductNo() {
@@ -46,6 +59,13 @@ public class Product extends Entity {
     public void setSuppliersProductNo(String suppliersProductNo) {
         this.suppliersProductNo = suppliersProductNo;
     }
-    
+
+    public List<ProductPrice> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<ProductPrice> prices) {
+        this.prices = prices;
+    }
     
 }

@@ -16,6 +16,9 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Invoice extends Entity {
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    protected LocalDateTime createdTime;
+    
     private float amount;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     protected LocalDateTime approvedTime; 
@@ -29,10 +32,9 @@ public class Invoice extends Entity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate entryDate;
-    private float exchangeRate;
+    private LocalDate entryDate = LocalDate.now();
+    private float exchangeRate = 1f;
     private String invoiceNo;
-    @JsonProperty("isPaid")
     private boolean paid;
     private String lineDescription;
     private String orderNo;
@@ -50,6 +52,16 @@ public class Invoice extends Entity {
     private List<BalanceModifier> balanceModifiers = new ArrayList<>();
     private InvoiceType type = InvoiceType.Invoice;
 
+    
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    public void setCreatedTime(LocalDateTime createdTime) {
+        this.createdTime = createdTime;
+    }
+    
+    @JsonIgnore
     public float getAmount() {
         return amount;
     }
@@ -161,6 +173,7 @@ public class Invoice extends Entity {
         return paid;
     }
 
+    @JsonProperty("isPaid")
     public void setPaid(boolean paid) {
         this.paid = paid;
     }

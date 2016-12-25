@@ -14,21 +14,14 @@ public class PluralInvoiceMapping extends InvoiceMapping implements PluralMappin
         return invoices;
     }
 
-    public void setContacts(List<Invoice> invoices) {
+    public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
     }
 
     @Override
     public Page<Invoice> getPage() {
-        Paging paging = getMeta().getPaging();
-        Pageable pageable = null;
-        int total = -1;
-        if(paging != null) {
-            pageable = new PageRequest(paging.page - 1, paging.pageSize);
-            total = paging.total;
-        }
-        
-        return new PageImpl(invoices, pageable, total);
+        invoices.forEach((i) -> resolveExtraData(i));
+        return BaseMapping.resolvePage(getMeta(), invoices);
     }
     
 }
