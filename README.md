@@ -38,7 +38,7 @@ billy:
 BillyExample.java
 
 ```java
-import com.previsto.model.Subscription;
+import com.previsto.billy.model.Contact;
 
 @SpringBootApplication
 public class BillyExample {
@@ -48,11 +48,11 @@ public class BillyExample {
     
     @PostConstruct
     private void init() {
-      Page<Subscription> subscriptions = client.getSubscriptionResource().findAll();
+      List<Contact> contacts = client.getContactResource().findAll();
         
-      System.out.println("Count: " + subscriptions.getCount());
-      for(Subscription sub : subscriptions) {
-        System.out.println("Sub: " + sub);
+      System.out.println("Count: " + contacts.size());
+      for(Contact contact : contacts) {
+        System.out.println("Contact: " + contact);
       }
     }
     
