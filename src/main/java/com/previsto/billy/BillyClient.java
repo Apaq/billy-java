@@ -3,6 +3,7 @@ package com.previsto.billy;
 import com.previsto.billy.repository.AccountResource;
 import com.previsto.billy.repository.ContactResource;
 import com.previsto.billy.repository.InvoiceResource;
+import com.previsto.billy.repository.OrganizationResource;
 import com.previsto.billy.repository.ProductResource;
 import java.time.LocalDate;
 import java.time.Month;
@@ -63,6 +64,10 @@ public class BillyClient {
         return serviceUrl;
     }
 
+    public OrganizationResource getOrganizationResource() {
+        return new OrganizationResource(restTemplate, serviceUrl);
+    }
+    
     public ContactResource getContactResource() {
         return new ContactResource(restTemplate, serviceUrl);
     }

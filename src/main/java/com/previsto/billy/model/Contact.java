@@ -24,7 +24,7 @@ public class Contact extends ArchivableEntity {
     private String localeId;
     private String ean;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    protected LocalDateTime createdTime;
+    private LocalDateTime createdTime;
     
 
     @JsonProperty("isCustomer")
