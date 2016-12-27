@@ -8,12 +8,10 @@ import com.previsto.billy.model.enums.InvoiceState;
 import com.previsto.billy.model.enums.InvoiceTaxMode;
 import com.previsto.billy.model.enums.InvoiceType;
 import com.previsto.billy.model.enums.PaymentTermsMode;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class Invoice extends Entity {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
@@ -38,8 +36,8 @@ public class Invoice extends Entity {
     private boolean paid;
     private String lineDescription;
     private String orderNo;
-    private int paymentTermsDays;
-    private PaymentTermsMode paymentTermsMode = PaymentTermsMode.Net;
+    private Integer paymentTermsDays;
+    private PaymentTermsMode paymentTermsMode;
     private String recurringInvoiceId;
     private InvoiceSentState sentState = InvoiceSentState.Unsent;
     private InvoiceState state = InvoiceState.Draft;

@@ -3,6 +3,8 @@ package com.previsto.billy.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.previsto.billy.model.enums.ContactType;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.previsto.billy.model.enums.AttachmentDeliveryMode;
+import com.previsto.billy.model.enums.PaymentTermsMode;
 import java.time.LocalDateTime;
 
 public class Contact extends ArchivableEntity {
@@ -26,12 +28,17 @@ public class Contact extends ArchivableEntity {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdTime;
     
-
     @JsonProperty("isCustomer")
     private boolean customer;
     @JsonProperty("isSupplier")
     private boolean supplier;
 
+    private PaymentTermsMode paymentTermsMode;
+    private Integer paymentTermsDays;
+
+    private String accessCode;
+    private AttachmentDeliveryMode emailAtachmentDeliveryMode;
+    
     public Contact() {
     }
 
@@ -196,4 +203,36 @@ public class Contact extends ArchivableEntity {
         this.supplier = supplier;
     }
 
+    public PaymentTermsMode getPaymentTermsMode() {
+        return paymentTermsMode;
+    }
+
+    public void setPaymentTermsMode(PaymentTermsMode paymentTermsMode) {
+        this.paymentTermsMode = paymentTermsMode;
+    }
+
+    public Integer getPaymentTermsDays() {
+        return paymentTermsDays;
+    }
+
+    public void setPaymentTermsDays(Integer paymentTermsDays) {
+        this.paymentTermsDays = paymentTermsDays;
+    }
+
+    public String getAccessCode() {
+        return accessCode;
+    }
+
+    public void setAccessCode(String accessCode) {
+        this.accessCode = accessCode;
+    }
+
+    public AttachmentDeliveryMode getEmailAtachmentDeliveryMode() {
+        return emailAtachmentDeliveryMode;
+    }
+
+    public void setEmailAtachmentDeliveryMode(AttachmentDeliveryMode emailAtachmentDeliveryMode) {
+        this.emailAtachmentDeliveryMode = emailAtachmentDeliveryMode;
+    }
+    
 }
