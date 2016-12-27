@@ -1,6 +1,7 @@
 package com.previsto.billy.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.previsto.billy.model.enums.AttachmentDeliveryMode;
 import com.previsto.billy.model.enums.InvoiceMode;
@@ -47,17 +48,13 @@ public class Organization extends Entity {
     private SubscriptionPeriod subscriptionPeriod;
     private float subscriptionDiscount;
     private LocalDate subscriptionExpires;
-    @JsonProperty("isTrial")
     private boolean trial;
-    @JsonProperty("isTerminated")
     private boolean terminated;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime terminationTime;
     private String localeId;
     private String billEmailAddress;
-    @JsonProperty("isUnmigrated")
     private boolean unmigrated;
-    @JsonProperty("isLocked")
     private boolean locked;
     private String lockedReason;
     private String appUrl;
@@ -82,6 +79,7 @@ public class Organization extends Entity {
         this.ownerUserId = ownerUserId;
     }
 
+    @JsonIgnore
     public LocalDateTime getCreatedTime() {
         return createdTime;
     }
@@ -98,6 +96,7 @@ public class Organization extends Entity {
         this.name = name;
     }
 
+    @JsonIgnore
     public String getUrl() {
         return url;
     }
@@ -186,6 +185,7 @@ public class Organization extends Entity {
         this.logoFileId = logoFileId;
     }
 
+    @JsonIgnore
     public String getLogoPdfFileId() {
         return logoPdfFileId;
     }
@@ -194,6 +194,7 @@ public class Organization extends Entity {
         this.logoPdfFileId = logoPdfFileId;
     }
 
+    @JsonIgnore
     public String getLogoUrl() {
         return logoUrl;
     }
@@ -210,6 +211,7 @@ public class Organization extends Entity {
         this.iconFileId = iconFileId;
     }
 
+    @JsonIgnore
     public String getIconUrl() {
         return iconUrl;
     }
@@ -218,6 +220,7 @@ public class Organization extends Entity {
         this.iconUrl = iconUrl;
     }
 
+    @JsonIgnore
     public String getIcon48Url() {
         return icon48Url;
     }
@@ -322,10 +325,12 @@ public class Organization extends Entity {
         this.subscriptionExpires = subscriptionExpires;
     }
 
+    @JsonIgnore
     public boolean isTrial() {
         return trial;
     }
 
+    @JsonProperty("isTrial")
     public void setTrial(boolean trial) {
         this.trial = trial;
     }
@@ -338,6 +343,7 @@ public class Organization extends Entity {
         this.terminated = terminated;
     }
 
+    @JsonIgnore
     public LocalDateTime getTerminationTime() {
         return terminationTime;
     }
@@ -354,6 +360,7 @@ public class Organization extends Entity {
         this.localeId = localeId;
     }
 
+    @JsonIgnore
     public String getBillEmailAddress() {
         return billEmailAddress;
     }
@@ -362,22 +369,27 @@ public class Organization extends Entity {
         this.billEmailAddress = billEmailAddress;
     }
 
+    @JsonIgnore
     public boolean isUnmigrated() {
         return unmigrated;
     }
 
+    @JsonProperty("isUnmigrated")
     public void setUnmigrated(boolean unmigrated) {
         this.unmigrated = unmigrated;
     }
 
+    @JsonIgnore
     public boolean isLocked() {
         return locked;
     }
 
+    @JsonProperty("isLocked")
     public void setLocked(boolean locked) {
         this.locked = locked;
     }
 
+    @JsonIgnore
     public String getLockedReason() {
         return lockedReason;
     }
@@ -386,6 +398,7 @@ public class Organization extends Entity {
         this.lockedReason = lockedReason;
     }
 
+    @JsonIgnore
     public String getAppUrl() {
         return appUrl;
     }
