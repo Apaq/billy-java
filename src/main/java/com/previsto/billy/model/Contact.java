@@ -37,7 +37,7 @@ public class Contact extends ArchivableEntity {
     private Integer paymentTermsDays;
 
     private String accessCode;
-    private AttachmentDeliveryMode emailAtachmentDeliveryMode;
+    private AttachmentDeliveryMode emailAttachmentDeliveryMode;
     
     public Contact() {
     }
@@ -227,12 +227,12 @@ public class Contact extends ArchivableEntity {
         this.accessCode = accessCode;
     }
 
-    public AttachmentDeliveryMode getEmailAtachmentDeliveryMode() {
-        return emailAtachmentDeliveryMode;
+    public AttachmentDeliveryMode getEmailAttachmentDeliveryMode() {
+        return emailAttachmentDeliveryMode;
     }
 
-    public void setEmailAtachmentDeliveryMode(AttachmentDeliveryMode emailAtachmentDeliveryMode) {
-        this.emailAtachmentDeliveryMode = emailAtachmentDeliveryMode;
+    public void setEmailAttachmentDeliveryMode(AttachmentDeliveryMode emailAttachmentDeliveryMode) {
+        this.emailAttachmentDeliveryMode = emailAttachmentDeliveryMode;
     }
     
 }
