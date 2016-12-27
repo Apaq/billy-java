@@ -225,6 +225,7 @@ public class Invoice extends Entity {
         this.sentState = sentState;
     }
 
+    @JsonIgnore
     public InvoiceState getState() {
         return state;
     }
