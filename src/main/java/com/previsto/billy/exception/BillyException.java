@@ -34,6 +34,12 @@ public abstract class BillyException extends RuntimeException {
         this.errorCode = errorCode;
     }
 
-    
+    public ExceptionMeta getMeta() {
+        return meta;
+    }
+
+    public void setMeta(ExceptionMeta meta) {
+        this.meta = meta;
+    }
 
 }

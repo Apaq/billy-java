@@ -139,7 +139,7 @@
                 <version>0.7.5.201505241946</version>
                 <configuration>
                     <excludes>
-                        <exclude>dk/xena/model/**</exclude>
+                        <exclude>com/previsto/billy/model/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
