@@ -1,6 +1,7 @@
 package com.previsto.billy.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.previsto.billy.model.enums.DiscountMode;
 
 public class InvoiceLine {
@@ -54,6 +55,7 @@ public class InvoiceLine {
         return amount;
     }
 
+    @JsonProperty
     public void setAmount(float amount) {
         this.amount = amount;
     }
@@ -63,14 +65,17 @@ public class InvoiceLine {
         return tax;
     }
 
+    @JsonProperty
     public void setTax(float tax) {
         this.tax = tax;
     }
 
+    @JsonIgnore
     public String getTaxRateId() {
         return taxRateId;
     }
 
+    @JsonProperty
     public void setTaxRateId(String taxRateId) {
         this.taxRateId = taxRateId;
     }

@@ -1,5 +1,8 @@
 package com.previsto.billy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Account extends ArchivableEntity {
     private String name;
     private int accountNo;
@@ -88,42 +91,52 @@ public class Account extends ArchivableEntity {
         this.bankAccount = bankAccount;
     }
 
+    @JsonIgnore
     public String getBankName() {
         return bankName;
     }
 
+    @JsonProperty
     public void setBankName(String bankName) {
         this.bankName = bankName;
     }
 
+    @JsonIgnore
     public String getBankRoutingNo() {
         return bankRoutingNo;
     }
 
+    @JsonProperty
     public void setBankRoutingNo(String bankRoutingNo) {
         this.bankRoutingNo = bankRoutingNo;
     }
 
+    @JsonIgnore
     public String getBankAccountNo() {
         return bankAccountNo;
     }
 
+    @JsonProperty
     public void setBankAccountNo(String bankAccountNo) {
         this.bankAccountNo = bankAccountNo;
     }
 
+    @JsonIgnore
     public String getBankSwift() {
         return bankSwift;
     }
 
+    @JsonProperty
     public void setBankSwift(String bankSwift) {
         this.bankSwift = bankSwift;
     }
 
+    @JsonIgnore
     public String getBankIBan() {
         return bankIBan;
     }
 
+    @JsonProperty
     public void setBankIBan(String bankIBan) {
         this.bankIBan = bankIBan;
     }

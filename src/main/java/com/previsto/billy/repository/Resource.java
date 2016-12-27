@@ -136,11 +136,20 @@ public abstract class Resource<T extends Persistable<String>> {
     }
 
     protected URI buildUri(String id) {
+        return buildUri(id, null);
+    }
+    
+    protected URI buildUri(String id, String suffix) {
         try {
             String url = serviceUrl + "/" + resourceName;
             if(id != null) {
                 url += "/" + id;
             }
+            
+            if(suffix != null) {
+                url += suffix;
+            }
+            
             return new URI(url);
         } catch (URISyntaxException ex) {
             LOG.error("URI invalid.", ex);

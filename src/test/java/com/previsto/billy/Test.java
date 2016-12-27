@@ -28,22 +28,11 @@ public class Test {
                 //client.getContactResource().get("X1rMtELASOi9K5bJvkmXZQ");
         System.out.println(contact);
         
-        Account account = null;
-        List<Account> accounts = client.getAccountResource().findAll();
-        for(Account current : accounts) {
-            if(current.getNatureId().equals("revenue") && current.getAccountNo() == 1110) {
-                account = current;
-                break;
-            }
-            
-            if(current.getNatureId().equals("revenue")) {
-                account = current;
-            }
-        }
         Product product = new Product();
         product.setName("Vinduespolering");
         product.setProductNo("WC_PREVISTO");
-        product.setAccountId(account.getId());
+        product.setAccountId(org.getDefaultSalesAccountId());
+        //product.setSalesTaxRulesetId(org.getDefaultSalesTaxRulesetId());
         product = client.getProductResource().save(product);
         
         Invoice invoice = new Invoice();
@@ -59,8 +48,9 @@ public class Test {
         invoice = client.getInvoiceResource().save(invoice);
         invoice = client.getInvoiceResource().save(invoice);
         System.out.println(invoice);
-        //client.getInvoiceResource().delete(invoice);
-        //client.getContactResource().delete(contact);
+        client.getInvoiceResource().delete(invoice);
+        client.getContactResource().delete(contact);
+        client.getProductResource().delete(product);
         
     }
 }

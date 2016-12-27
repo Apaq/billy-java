@@ -51,10 +51,12 @@ public class Invoice extends Entity {
     private InvoiceType type = InvoiceType.Invoice;
 
     
+    @JsonIgnore
     public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
+    @JsonProperty
     public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
@@ -64,14 +66,17 @@ public class Invoice extends Entity {
         return amount;
     }
 
+    @JsonProperty
     public void setAmount(float amount) {
         this.amount = amount;
     }
 
+    @JsonIgnore
     public LocalDateTime getApprovedTime() {
         return approvedTime;
     }
 
+    @JsonProperty
     public void setApprovedTime(LocalDateTime approvedTime) {
         this.approvedTime = approvedTime;
     }
@@ -89,6 +94,7 @@ public class Invoice extends Entity {
         return balance;
     }
 
+    @JsonProperty
     public void setBalance(float balance) {
         this.balance = balance;
     }
@@ -133,10 +139,12 @@ public class Invoice extends Entity {
         this.downloadUrl = downloadUrl;
     }
 
+    @JsonIgnore
     public LocalDate getDueDate() {
         return dueDate;
     }
 
+    @JsonProperty
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
@@ -146,6 +154,7 @@ public class Invoice extends Entity {
         return entryDate;
     }
 
+    @JsonProperty
     public void setEntryDate(LocalDate entryDate) {
         this.entryDate = entryDate;
     }
@@ -213,6 +222,7 @@ public class Invoice extends Entity {
         return recurringInvoiceId;
     }
 
+    @JsonProperty
     public void setRecurringInvoiceId(String recurringInvoiceId) {
         this.recurringInvoiceId = recurringInvoiceId;
     }
@@ -230,6 +240,7 @@ public class Invoice extends Entity {
         return state;
     }
 
+    @JsonProperty
     public void setState(InvoiceState state) {
         this.state = state;
     }
@@ -239,6 +250,7 @@ public class Invoice extends Entity {
         return tax;
     }
 
+    @JsonProperty
     public void setTax(float tax) {
         this.tax = tax;
     }
@@ -282,6 +294,7 @@ public class Invoice extends Entity {
         return balanceModifiers;
     }
 
+    @JsonProperty
     public void setBalanceModifiers(List<BalanceModifier> balanceModifiers) {
         this.balanceModifiers = balanceModifiers;
     }

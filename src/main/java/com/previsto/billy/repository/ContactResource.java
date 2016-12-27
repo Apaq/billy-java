@@ -13,7 +13,7 @@ public class ContactResource extends Resource<Contact>{
     private static final Map<String, String> SIDELOAD_PARAMS = new HashMap<>();
     
     static {
-        SIDELOAD_PARAMS.put("include", "contact.city,contact.zipcode");
+        SIDELOAD_PARAMS.put("include", "contact.city,contact.zipcode,contact.contactPersons:embed");
     }
     
     public ContactResource(RestTemplate restTemplate, String serviceUrl) {

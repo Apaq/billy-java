@@ -84,6 +84,7 @@ public class Organization extends Entity {
         return createdTime;
     }
 
+    @JsonProperty
     public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
@@ -101,6 +102,7 @@ public class Organization extends Entity {
         return url;
     }
 
+    @JsonProperty
     public void setUrl(String url) {
         this.url = url;
     }
@@ -190,6 +192,7 @@ public class Organization extends Entity {
         return logoPdfFileId;
     }
 
+    @JsonProperty
     public void setLogoPdfFileId(String logoPdfFileId) {
         this.logoPdfFileId = logoPdfFileId;
     }
@@ -199,6 +202,7 @@ public class Organization extends Entity {
         return logoUrl;
     }
 
+    @JsonProperty
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
     }
@@ -216,6 +220,7 @@ public class Organization extends Entity {
         return iconUrl;
     }
 
+    @JsonProperty
     public void setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
     }
@@ -225,6 +230,7 @@ public class Organization extends Entity {
         return icon48Url;
     }
 
+    @JsonProperty
     public void setIcon48Url(String icon48Url) {
         this.icon48Url = icon48Url;
     }
@@ -348,6 +354,7 @@ public class Organization extends Entity {
         return terminationTime;
     }
 
+    @JsonProperty
     public void setTerminationTime(LocalDateTime terminationTime) {
         this.terminationTime = terminationTime;
     }
@@ -394,6 +401,7 @@ public class Organization extends Entity {
         return lockedReason;
     }
 
+    @JsonProperty
     public void setLockedReason(String lockedReason) {
         this.lockedReason = lockedReason;
     }
@@ -403,6 +411,7 @@ public class Organization extends Entity {
         return appUrl;
     }
 
+    @JsonProperty
     public void setAppUrl(String appUrl) {
         this.appUrl = appUrl;
     }

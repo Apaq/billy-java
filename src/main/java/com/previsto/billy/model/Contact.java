@@ -1,11 +1,14 @@
 package com.previsto.billy.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.previsto.billy.model.enums.ContactType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.previsto.billy.model.enums.AttachmentDeliveryMode;
 import com.previsto.billy.model.enums.PaymentTermsMode;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Contact extends ArchivableEntity {
 
@@ -39,6 +42,8 @@ public class Contact extends ArchivableEntity {
     private String accessCode;
     private AttachmentDeliveryMode emailAttachmentDeliveryMode;
     
+    private List<ContactPerson> contactPersons = new ArrayList<>();
+    
     public Contact() {
     }
 
@@ -49,10 +54,12 @@ public class Contact extends ArchivableEntity {
         this.countryId = countryId;
     }
 
+    @JsonIgnore
     public LocalDateTime getCreatedTime() {
         return createdTime;
     }
 
+    @JsonProperty
     public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
@@ -233,6 +240,14 @@ public class Contact extends ArchivableEntity {
 
     public void setEmailAttachmentDeliveryMode(AttachmentDeliveryMode emailAttachmentDeliveryMode) {
         this.emailAttachmentDeliveryMode = emailAttachmentDeliveryMode;
+    }
+
+    public List<ContactPerson> getContactPersons() {
+        return contactPersons;
+    }
+
+    public void setContactPersons(List<ContactPerson> contactPersons) {
+        this.contactPersons = contactPersons;
     }
     
 }

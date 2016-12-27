@@ -2,6 +2,7 @@ package com.previsto.billy.repository;
 
 import com.previsto.billy.model.Contact;
 import com.previsto.billy.model.Invoice;
+import com.previsto.billy.model.enums.InvoiceState;
 import java.time.LocalDateTime;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
@@ -45,16 +46,19 @@ public class InvoiceResourceTest extends ResourceTestBase<Invoice> {
     protected void doCheckEntity(Invoice entity) {
         if ("UdsHDvAESV2eCZHSCYOfzA".equals(entity.getId())) {
             assertEquals(LocalDateTime.parse("2016-12-23T08:18:20"), entity.getCreatedTime());
+            assertEquals(InvoiceState.Approved, entity.getState());
             return;
         }
 
         if ("cSHBqWWITexZvQy29lqpYg".equals(entity.getId())) {
             assertEquals(LocalDateTime.parse("2016-12-23T08:16:46"), entity.getCreatedTime());
+            assertEquals(InvoiceState.Draft, entity.getState());
             return;
         }
 
         if ("o9bpexuzTb25IfEgW7E1Wg".equals(entity.getId())) {
             assertEquals(LocalDateTime.parse("2016-12-23T08:13:48"), entity.getCreatedTime());
+            assertEquals(InvoiceState.Approved, entity.getState());
             return;
         }
         throw new RuntimeException("Unexpected contact entity [id=" + entity.getId() + "]");
