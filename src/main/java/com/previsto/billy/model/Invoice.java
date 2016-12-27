@@ -192,11 +192,11 @@ public class Invoice extends Entity {
         this.orderNo = orderNo;
     }
 
-    public int getPaymentTermsDays() {
+    public Integer getPaymentTermsDays() {
         return paymentTermsDays;
     }
 
-    public void setPaymentTermsDays(int paymentTermsDays) {
+    public void setPaymentTermsDays(Integer paymentTermsDays) {
         this.paymentTermsDays = paymentTermsDays;
     }
 
