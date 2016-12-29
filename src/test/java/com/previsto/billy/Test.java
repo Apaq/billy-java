@@ -23,7 +23,10 @@ public class Test {
         
         // Create
         contact = client.getContactResource().save(contact);
+        String id = contact.getId();
         // Update
+        contact = new Contact(ContactType.Company, "Apaq", "DK");
+        contact.setId(id);
         contact = client.getContactResource().save(contact);
                 //client.getContactResource().get("X1rMtELASOi9K5bJvkmXZQ");
         System.out.println(contact);
