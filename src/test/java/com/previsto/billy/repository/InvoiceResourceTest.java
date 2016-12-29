@@ -39,7 +39,7 @@ public class InvoiceResourceTest extends ResourceTestBase<Invoice> {
     
     @Override
     protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.invoice.id").value(generateSingularId());
+        return jsonPath("$.invoice.isPaid").doesNotExist();
     }
 
     @Override

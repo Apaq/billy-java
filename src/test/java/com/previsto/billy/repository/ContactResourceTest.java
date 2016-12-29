@@ -38,7 +38,7 @@ public class ContactResourceTest extends ResourceTestBase<Contact> {
     
     @Override
     protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.contact.id").value(generateSingularId());
+        return jsonPath("$.contact.isArchived").value(false);
     }
 
     @Override

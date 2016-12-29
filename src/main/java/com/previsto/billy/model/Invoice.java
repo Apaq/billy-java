@@ -14,11 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Invoice extends Entity {
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     protected LocalDateTime createdTime;
     
     private float amount;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     protected LocalDateTime approvedTime; 
     private String attContactPersonId;
     private float balance;
@@ -57,6 +55,7 @@ public class Invoice extends Entity {
     }
 
     @JsonProperty
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
@@ -67,6 +66,7 @@ public class Invoice extends Entity {
     }
 
     @JsonProperty
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public void setAmount(float amount) {
         this.amount = amount;
     }
