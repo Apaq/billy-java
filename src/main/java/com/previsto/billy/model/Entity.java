@@ -1,19 +1,20 @@
 package com.previsto.billy.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDateTime;
 import org.springframework.data.domain.Persistable;
 
 public abstract class Entity implements Persistable<String> {
 
     private String id;
 
+    @Override
+    @JsonIgnore
     public String getId() {
         return id;
     }
 
+    @JsonProperty
     public void setId(String id) {
         this.id = id;
     }

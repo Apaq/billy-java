@@ -1,13 +1,11 @@
 package com.previsto.billy;
 
-import com.previsto.billy.model.Account;
 import com.previsto.billy.model.Contact;
 import com.previsto.billy.model.Invoice;
 import com.previsto.billy.model.InvoiceLine;
 import com.previsto.billy.model.Organization;
 import com.previsto.billy.model.Product;
 import com.previsto.billy.model.enums.ContactType;
-import java.util.List;
 
 public class Test {
 
@@ -51,7 +49,28 @@ public class Test {
         invoice = client.getInvoiceResource().save(invoice);
         invoice = client.getInvoiceResource().save(invoice);
         System.out.println(invoice);
+        
+        client.getInvoiceResource().approve(invoice.getId());
+        
+        Invoice invoice2 = new Invoice();
+        invoice2.setContactId(contact.getId());
+        invoice2.setCurrencyId("DKK");
+        line = new InvoiceLine();
+        line.setUnitPrice(200);
+        line.setDescription("Test");
+        //line.setDiscountValue(0);
+        //line.setDiscountMode(DiscountMode.PercentageDiscount);
+        line.setProductId(product.getId());
+        invoice2.getLines().add(line);
+        invoice2 = client.getInvoiceResource().save(invoice2);
+        invoice2 = client.getInvoiceResource().save(invoice2);
+        System.out.println(invoice);
+        
+        client.getInvoiceResource().approve(invoice2.getId());
+        
+        
         client.getInvoiceResource().delete(invoice);
+        client.getInvoiceResource().delete(invoice2);
         client.getContactResource().delete(contact);
         client.getProductResource().delete(product);
         

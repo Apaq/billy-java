@@ -37,7 +37,7 @@ public class OrganizationResourceTest extends ResourceTestBase<Organization> {
     
     @Override
     protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.organization.id").value(generateSingularId());
+        return jsonPath("$.organization.baseCurrencyId").value("DKK");
     }
 
     @Override

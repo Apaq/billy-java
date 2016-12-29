@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 public class Organization extends Entity {
 
     private String ownerUserId;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdTime;
     private String name;
     private String url;
@@ -50,7 +49,6 @@ public class Organization extends Entity {
     private LocalDate subscriptionExpires;
     private boolean trial;
     private boolean terminated;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime terminationTime;
     private String localeId;
     private String billEmailAddress;
@@ -85,6 +83,7 @@ public class Organization extends Entity {
     }
 
     @JsonProperty
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
@@ -355,6 +354,7 @@ public class Organization extends Entity {
     }
 
     @JsonProperty
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public void setTerminationTime(LocalDateTime terminationTime) {
         this.terminationTime = terminationTime;
     }

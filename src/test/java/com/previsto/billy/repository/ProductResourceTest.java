@@ -37,7 +37,7 @@ public class ProductResourceTest extends ResourceTestBase<Product> {
     
     @Override
     protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.product.id").value(generateSingularId());
+        return jsonPath("$.product.productNo").value("WC_PREVISTO");
     }
 
     @Override

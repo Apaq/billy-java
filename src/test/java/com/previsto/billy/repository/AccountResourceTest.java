@@ -37,7 +37,7 @@ public class AccountResourceTest extends ResourceTestBase<Account> {
     
     @Override
     protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.account.id").value(generateSingularId());
+        return jsonPath("$.account.accountNo").value(7210);
     }
 
     @Override

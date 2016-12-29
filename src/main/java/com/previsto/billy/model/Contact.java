@@ -28,7 +28,6 @@ public class Contact extends ArchivableEntity {
     private String registrationNo;
     private String localeId;
     private String ean;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdTime;
     
     @JsonProperty("isCustomer")
@@ -60,6 +59,7 @@ public class Contact extends ArchivableEntity {
     }
 
     @JsonProperty
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public void setCreatedTime(LocalDateTime createdTime) {
         this.createdTime = createdTime;
     }
