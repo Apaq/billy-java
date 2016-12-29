@@ -25,7 +25,6 @@ public class Invoice extends Entity {
     private String creditedInvoiceId;
     private String currencyId;
     private String downloadUrl;
-    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate entryDate = LocalDate.now();
@@ -145,16 +144,15 @@ public class Invoice extends Entity {
     }
 
     @JsonProperty
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
-    @JsonIgnore
     public LocalDate getEntryDate() {
         return entryDate;
     }
 
-    @JsonProperty
     public void setEntryDate(LocalDate entryDate) {
         this.entryDate = entryDate;
     }
@@ -167,10 +165,12 @@ public class Invoice extends Entity {
         this.exchangeRate = exchangeRate;
     }
 
+    @JsonIgnore
     public String getInvoiceNo() {
         return invoiceNo;
     }
 
+    @JsonProperty
     public void setInvoiceNo(String invoiceNo) {
         this.invoiceNo = invoiceNo;
     }
