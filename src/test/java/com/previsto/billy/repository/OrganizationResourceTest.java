@@ -2,6 +2,8 @@ package com.previsto.billy.repository;
 
 import com.previsto.billy.model.Organization;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -36,8 +38,8 @@ public class OrganizationResourceTest extends ResourceTestBase<Organization> {
     }
     
     @Override
-    protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.organization.baseCurrencyId").value("DKK");
+    protected List<RequestMatcher> generateExpectedSaveRequest() {
+        return Arrays.asList(new RequestMatcher[]{jsonPath("$.organization.baseCurrencyId").value("DKK")});
     }
 
     @Override

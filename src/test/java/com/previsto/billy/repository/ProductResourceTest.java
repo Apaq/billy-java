@@ -2,6 +2,8 @@ package com.previsto.billy.repository;
 
 import com.previsto.billy.model.Product;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -34,11 +36,12 @@ public class ProductResourceTest extends ResourceTestBase<Product> {
     protected String generateSingularId() {
         return "ksSgZEGPQmGohQ9eWxVOoQ";
     }
-    
+
     @Override
-    protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.product.productNo").value("WC_PREVISTO");
+    protected List<RequestMatcher> generateExpectedSaveRequest() {
+        return Arrays.asList(new RequestMatcher[]{jsonPath("$.product.productNo").value("WC_PREVISTO")});
     }
+    
 
     @Override
     protected void doCheckEntity(Product entity) {

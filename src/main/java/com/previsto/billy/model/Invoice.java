@@ -201,18 +201,22 @@ public class Invoice extends Entity {
         this.orderNo = orderNo;
     }
 
+    @JsonIgnore
     public Integer getPaymentTermsDays() {
         return paymentTermsDays;
     }
 
+    @JsonProperty
     public void setPaymentTermsDays(Integer paymentTermsDays) {
         this.paymentTermsDays = paymentTermsDays;
     }
 
+    @JsonIgnore
     public PaymentTermsMode getPaymentTermsMode() {
         return paymentTermsMode;
     }
 
+    @JsonProperty
     public void setPaymentTermsMode(PaymentTermsMode paymentTermsMode) {
         this.paymentTermsMode = paymentTermsMode;
     }

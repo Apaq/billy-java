@@ -3,6 +3,8 @@ package com.previsto.billy.repository;
 import com.previsto.billy.model.Contact;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -37,8 +39,8 @@ public class ContactResourceTest extends ResourceTestBase<Contact> {
     }
     
     @Override
-    protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.contact.isArchived").value(false);
+    protected List<RequestMatcher> generateExpectedSaveRequest() {
+        return Arrays.asList(new RequestMatcher[]{jsonPath("$.contact.isArchived").value(false)});
     }
 
     @Override

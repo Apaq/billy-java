@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.RequestMatcher;
+import org.springframework.test.web.client.ResponseActions;
 import org.springframework.web.client.RestTemplate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -40,7 +41,7 @@ public abstract class ResourceTestBase<T extends Entity> {
     protected abstract DefaultResponseCreator generateExpectedGetResponse();
     protected abstract DefaultResponseCreator generateExpectedFindAllResponse();
     
-    protected abstract RequestMatcher generateExpectedSaveRequest();
+    protected abstract List<RequestMatcher> generateExpectedSaveRequest();
     
     protected abstract void doCheckEntity(T entity);
 
@@ -93,8 +94,14 @@ public abstract class ResourceTestBase<T extends Entity> {
         String queryParams = generateExpectedGetQueryParams();
         mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id + queryParams)).andExpect(method(HttpMethod.GET))
                 .andRespond(generateExpectedGetResponse());
-        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.PUT)).andExpect(generateExpectedSaveRequest())
-                .andRespond(generateExpectedGetResponse());
+        ResponseActions actions = mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.PUT));
+        
+        for(RequestMatcher m : generateExpectedSaveRequest()) {
+            actions.andExpect(m);
+        }
+        
+        actions.andRespond(generateExpectedGetResponse());
+        
         T entity = resource.get(id);
         resource.save(entity);
         mockServer.verify();
