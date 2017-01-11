@@ -14,7 +14,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class OrganizationResourceTest extends ResourceTestBase<Organization> {
 
     public OrganizationResourceTest() {
-        super(new OrganizationResource(buildRestTemplate(), "http://server/Api"));
+        super(new OrganizationResource(buildRestTemplate(), "http://server/Api"), Organization.class);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class OrganizationResourceTest extends ResourceTestBase<Organization> {
     
     @Override
     protected List<RequestMatcher> generateExpectedSaveRequest() {
-        return Arrays.asList(new RequestMatcher[]{jsonPath("$.organization.baseCurrencyId").value("DKK")});
+        return Arrays.asList(new RequestMatcher[]{jsonPath("$.organization.logoUrl").doesNotExist()});
     }
 
     @Override

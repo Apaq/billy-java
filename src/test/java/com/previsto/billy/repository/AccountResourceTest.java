@@ -14,7 +14,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class AccountResourceTest extends ResourceTestBase<Account> {
 
     public AccountResourceTest() {
-        super(new AccountResource(buildRestTemplate(), "http://server/Api"));
+        super(new AccountResource(buildRestTemplate(), "http://server/Api"), Account.class);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class AccountResourceTest extends ResourceTestBase<Account> {
     
     @Override
     protected List<RequestMatcher> generateExpectedSaveRequest() {
-        return Arrays.asList(new RequestMatcher[]{jsonPath("$.account.accountNo").value(7210)});
+        return Arrays.asList(new RequestMatcher[]{jsonPath("$.account.bankAccountNo").doesNotExist()});
     }
 
     @Override

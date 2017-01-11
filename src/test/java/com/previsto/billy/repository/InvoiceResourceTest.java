@@ -16,7 +16,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class InvoiceResourceTest extends ResourceTestBase<Invoice> {
 
     public InvoiceResourceTest() {
-        super(new InvoiceResource(buildRestTemplate(), "http://server/Api"));
+        super(new InvoiceResource(buildRestTemplate(), "http://server/Api"), Invoice.class);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.previsto.billy.repository;
 import com.previsto.billy.model.Contact;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.http.MediaType;
@@ -15,7 +16,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class ContactResourceTest extends ResourceTestBase<Contact> {
 
     public ContactResourceTest() {
-        super(new ContactResource(buildRestTemplate(), "http://server/Api"));
+        super(new ContactResource(buildRestTemplate(), "http://server/Api"), Contact.class);
     }
 
     @Override
@@ -40,7 +41,12 @@ public class ContactResourceTest extends ResourceTestBase<Contact> {
     
     @Override
     protected List<RequestMatcher> generateExpectedSaveRequest() {
-        return Arrays.asList(new RequestMatcher[]{jsonPath("$.contact.isArchived").value(false)});
+        List<RequestMatcher> matchers = new ArrayList<>();
+        matchers.add(jsonPath("$.contact.isArchived").value(false));
+        matchers.add(jsonPath("$.contact.name").isEmpty());
+        matchers.add(jsonPath("$.contact.paymentTermsDays").doesNotExist());
+        matchers.add(jsonPath("$.contact.paymentTermsMode").doesNotExist());
+        return matchers;
     }
 
     @Override

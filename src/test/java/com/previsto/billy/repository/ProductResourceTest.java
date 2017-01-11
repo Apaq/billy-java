@@ -14,7 +14,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class ProductResourceTest extends ResourceTestBase<Product> {
 
     public ProductResourceTest() {
-        super(new ProductResource(buildRestTemplate(), "http://server/Api"));
+        super(new ProductResource(buildRestTemplate(), "http://server/Api"), Product.class);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class ProductResourceTest extends ResourceTestBase<Product> {
 
     @Override
     protected List<RequestMatcher> generateExpectedSaveRequest() {
-        return Arrays.asList(new RequestMatcher[]{jsonPath("$.product.productNo").value("WC_PREVISTO")});
+        return Arrays.asList(new RequestMatcher[]{});
     }
     
 
