@@ -9,8 +9,13 @@ public class RequestException extends BillyException {
     private Map<String, Object> validationErrors = null;
     
     @JsonCreator
-    public RequestException(@JsonProperty(value = "errorCode") String errorCode, @JsonProperty(value = "errorMessage") String errorMessage, @JsonProperty("helpUrl") String helpUrl, @JsonProperty("meta") ExceptionMeta meta) {
-        super(errorMessage, errorCode, meta);
+    public RequestException(@JsonProperty(value = "errorCode") String errorCode, 
+            @JsonProperty(value = "errorMessage") String errorMessage, 
+            @JsonProperty("helpUrl") String helpUrl, 
+            @JsonProperty("meta") ExceptionMeta meta,
+            @JsonProperty("validationErrors") Map<String, Object> validationErrors) {
+        super(ExceptionHelper.resolveMessage(errorMessage, validationErrors), errorCode, meta);
+        this.validationErrors = validationErrors;
     }
 
     public RequestException(String message) {
@@ -21,10 +26,6 @@ public class RequestException extends BillyException {
         return validationErrors;
     }
 
-    public void setValidationErrors(Map<String, Object> validationErrors) {
-        this.validationErrors = validationErrors;
-    }
-    
     private static final long serialVersionUID = 1L;
 
     
