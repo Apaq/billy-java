@@ -8,6 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.RequestMatcher;
 import org.springframework.test.web.client.ResponseActions;
@@ -82,7 +83,7 @@ public abstract class ResourceTestBase<T extends Entity> {
         
         String queryParams = generateExpectedGetQueryParams();
         mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id + queryParams)).andExpect(method(HttpMethod.GET))
-                .andRespond(withStatus(HttpStatus.NOT_FOUND));
+                .andRespond(withStatus(HttpStatus.NOT_FOUND).body(Util.readResourceFromFile("error_not_found.json")).contentType(MediaType.APPLICATION_JSON));
         T entity = resource.get(id);
         assertNull(entity);
         mockServer.verify();
