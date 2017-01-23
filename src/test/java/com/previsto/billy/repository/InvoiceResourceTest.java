@@ -4,6 +4,8 @@ import com.previsto.billy.model.Contact;
 import com.previsto.billy.model.Invoice;
 import com.previsto.billy.model.enums.InvoiceState;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -14,7 +16,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class InvoiceResourceTest extends ResourceTestBase<Invoice> {
 
     public InvoiceResourceTest() {
-        super(new InvoiceResource(buildRestTemplate(), "http://server/Api"));
+        super(new InvoiceResource(buildRestTemplate(), "http://server/Api"), Invoice.class);
     }
 
     @Override
@@ -38,8 +40,12 @@ public class InvoiceResourceTest extends ResourceTestBase<Invoice> {
     }
     
     @Override
-    protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.invoice.isPaid").doesNotExist();
+    protected List<RequestMatcher> generateExpectedSaveRequest() {
+        List<RequestMatcher> matchers = new ArrayList<>();
+        matchers.add(jsonPath("$.invoice.isPaid").doesNotExist());
+        matchers.add(jsonPath("$.invoice.paymentTermsDays").doesNotExist());
+        matchers.add(jsonPath("$.invoice.paymentTermsMode").doesNotExist());
+        return matchers;
     }
 
     @Override

@@ -18,6 +18,7 @@ public class Account extends ArchivableEntity {
     private String bankAccountNo;
     private String bankSwift;
     private String bankIBan;
+    private AccountGroup group;
 
     public String getName() {
         return name;
@@ -49,6 +50,14 @@ public class Account extends ArchivableEntity {
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;
+    }
+
+    public AccountGroup getGroup() {
+        return group;
+    }
+
+    public void setGroup(AccountGroup group) {
+        this.group = group;
     }
 
     public String getNatureId() {

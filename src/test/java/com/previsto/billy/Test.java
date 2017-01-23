@@ -18,17 +18,13 @@ public class Test {
         //Page<Contact> contacts = client.getContactResource().findAll(new PageRequest(0, 2));
         Contact contact = new Contact(ContactType.Company, "Apaq", "DK");
         contact.setSupplier(true);
+        contact = client.getContactResource().save(contact);
         
-        // Create
-        contact = client.getContactResource().save(contact);
-        // Update
-        contact = client.getContactResource().save(contact);
-                //client.getContactResource().get("X1rMtELASOi9K5bJvkmXZQ");
         System.out.println(contact);
         
         Product product = new Product();
         product.setName("Vinduespolering");
-        product.setProductNo("WC_PREVISTO");
+        product.setProductNo("TEST_CODE");
         product.setAccountId(org.getDefaultSalesAccountId());
         //product.setSalesTaxRulesetId(org.getDefaultSalesTaxRulesetId());
         product = client.getProductResource().save(product);
@@ -47,7 +43,7 @@ public class Test {
         invoice = client.getInvoiceResource().save(invoice);
         System.out.println(invoice);
         
-        client.getInvoiceResource().approve(invoice.getId());
+        //client.getInvoiceResource().approve(invoice.getId());
         
         Invoice invoice2 = new Invoice();
         invoice2.setContactId(contact.getId());
@@ -63,7 +59,7 @@ public class Test {
         invoice2 = client.getInvoiceResource().save(invoice2);
         System.out.println(invoice);
         
-        client.getInvoiceResource().approve(invoice2.getId());
+        //client.getInvoiceResource().approve(invoice2.getId());
         
         
         client.getInvoiceResource().delete(invoice);

@@ -2,6 +2,8 @@ package com.previsto.billy.repository;
 
 import com.previsto.billy.model.Account;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -12,7 +14,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class AccountResourceTest extends ResourceTestBase<Account> {
 
     public AccountResourceTest() {
-        super(new AccountResource(buildRestTemplate(), "http://server/Api"));
+        super(new AccountResource(buildRestTemplate(), "http://server/Api"), Account.class);
     }
 
     @Override
@@ -27,7 +29,7 @@ public class AccountResourceTest extends ResourceTestBase<Account> {
 
     @Override
     protected String generateExpectedGetQueryParams() {
-        return "";
+        return "?include=account.group";
     }
 
     @Override
@@ -36,8 +38,8 @@ public class AccountResourceTest extends ResourceTestBase<Account> {
     }
     
     @Override
-    protected RequestMatcher generateExpectedSaveRequest() {
-        return jsonPath("$.account.accountNo").value(7210);
+    protected List<RequestMatcher> generateExpectedSaveRequest() {
+        return Arrays.asList(new RequestMatcher[]{jsonPath("$.account.bankAccountNo").doesNotExist()});
     }
 
     @Override

@@ -66,7 +66,7 @@ public class ErrorTest {
             mockServer.verify();
             Assert.fail("Should have thrown exception");
         } catch(RequestException ex) {
-            
+            Assert.assertTrue(ex.getMessage().contains("Invoices must have at least one invoice line"));
         }   
 
     }

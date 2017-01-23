@@ -6,5 +6,7 @@ public enum InvoiceState {
     @JsonProperty("draft")
     Draft, 
     @JsonProperty("approved")
-    Approved
+    Approved,
+    @JsonProperty("voided")
+    Voided
 }

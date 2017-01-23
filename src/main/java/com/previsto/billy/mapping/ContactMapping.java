@@ -39,7 +39,7 @@ public abstract class ContactMapping extends BaseMapping<Contact> {
         if (contact.getZipcodeId() != null && getZipcodes() != null) {
             for (ZipCode zip : getZipcodes()) {
                 if (zip.getId().equals(contact.getZipcodeId())) {
-                    contact.setCityText(zip.getZipcode());
+                    contact.setZipcodeText(zip.getZipcode());
                     contact.setCountryId(zip.getCountryId());
                 }
             }

@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.client.RequestMatcher;
+import org.springframework.test.web.client.ResponseActions;
 import org.springframework.web.client.RestTemplate;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -22,12 +23,14 @@ public abstract class ResourceTestBase<T extends Entity> {
     private final Resource<T> resource;
     private final RestTemplate restTemplate;
     private final String resourceName;
+    private Class type;
 
-    public ResourceTestBase(Resource<T> resource) {
+    public ResourceTestBase(Resource<T> resource, Class type) {
         this.resource = resource;
         this.resource.restTemplate.setErrorHandler(new ErrorHandler());
         this.restTemplate = resource.restTemplate;
         this.resourceName = resource.resourceName;
+        this.type = type;
     }
 
     @Before
@@ -40,7 +43,7 @@ public abstract class ResourceTestBase<T extends Entity> {
     protected abstract DefaultResponseCreator generateExpectedGetResponse();
     protected abstract DefaultResponseCreator generateExpectedFindAllResponse();
     
-    protected abstract RequestMatcher generateExpectedSaveRequest();
+    protected abstract List<RequestMatcher> generateExpectedSaveRequest();
     
     protected abstract void doCheckEntity(T entity);
 
@@ -86,16 +89,21 @@ public abstract class ResourceTestBase<T extends Entity> {
     }
 
     @Test
-    public void testSave() {
+    public void testSave() throws ReflectiveOperationException {
         System.out.println("save");
         String id = generateSingularId();
         
-        String queryParams = generateExpectedGetQueryParams();
-        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id + queryParams)).andExpect(method(HttpMethod.GET))
-                .andRespond(generateExpectedGetResponse());
-        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.PUT)).andExpect(generateExpectedSaveRequest())
-                .andRespond(generateExpectedGetResponse());
-        T entity = resource.get(id);
+        T entity = (T) type.newInstance();
+        entity.setId(id);
+        ResponseActions actions = mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.PUT));
+        
+        for(RequestMatcher m : generateExpectedSaveRequest()) {
+            actions = actions.andExpect(m);
+        }
+        
+        actions.andRespond(generateExpectedGetResponse());
+        
+        
         resource.save(entity);
         mockServer.verify();
         
