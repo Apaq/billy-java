@@ -6,6 +6,7 @@ import com.previsto.billy.exception.AuthenticationException;
 import com.previsto.billy.exception.RequestException;
 import com.previsto.billy.exception.UnknownException;
 import com.previsto.billy.exception.BillyException;
+import com.previsto.billy.exception.ResourceNotFoundException;
 import java.io.IOException;
 import org.apache.commons.io.IOUtils;
 import org.springframework.http.client.ClientHttpResponse;
@@ -17,7 +18,7 @@ public class ErrorHandler implements ResponseErrorHandler {
 
     @Override
     public boolean hasError(ClientHttpResponse response) throws IOException {
-        return response.getRawStatusCode() >= 300 && response.getRawStatusCode() != 404;
+        return response.getRawStatusCode() >= 300;
     }
 
     @Override
@@ -28,6 +29,8 @@ public class ErrorHandler implements ResponseErrorHandler {
             clazz = ApiException.class;
         } else if (response.getRawStatusCode() == 401 || response.getRawStatusCode() == 403) {
             clazz = AuthenticationException.class;
+        } else if (response.getRawStatusCode() == 404) {
+            clazz = ResourceNotFoundException.class;
         } else {
             clazz = RequestException.class;
         }

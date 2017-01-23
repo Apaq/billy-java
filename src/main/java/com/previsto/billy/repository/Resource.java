@@ -1,6 +1,7 @@
 package com.previsto.billy.repository;
 
 import com.previsto.billy.exception.RequestException;
+import com.previsto.billy.exception.ResourceNotFoundException;
 import com.previsto.billy.exception.UnknownException;
 import com.previsto.billy.mapping.PersistMapping;
 import com.previsto.billy.mapping.PluralMapping;
@@ -85,8 +86,13 @@ public abstract class Resource<T extends Persistable<String>> {
         }
 
         url = builder.build().encode().toUri();
-        SingularMapping<T> result = (SingularMapping<T>) restTemplate.getForObject(url, singularClass);
-        return result == null ? null : result.getEntity();
+        try {
+            SingularMapping<T> result = (SingularMapping<T>) restTemplate.getForObject(url, singularClass);
+            return result.getEntity();
+        } catch(ResourceNotFoundException ex) {
+            LOG.debug("Unable to find resource [id={}]", id);
+            return null;
+        }
     }
 
     public void delete(T entity) {
