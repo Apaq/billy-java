@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConditionalOnBean(BillyClient.class)
+@ConditionalOnEnabledHealthIndicator(value = "billy")
 public class BillyHealthIndicator implements HealthIndicator {
 
     @Autowired
