@@ -7,6 +7,8 @@ import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.boot.actuate.autoconfigure.ConditionalOnEnabledHealthIndicator;
+
 
 @Component
 @ConditionalOnEnabledHealthIndicator(value = "billy")
