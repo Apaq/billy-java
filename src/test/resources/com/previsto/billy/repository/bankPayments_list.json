@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "statusCode": 200,
+    "success": true,
+    "paging": {
+      "page": 1,
+      "pageSize": 1000,
+      "pageCount": 1,
+      "total": 1
+    },
+    "time": 0.039314985275269
+  },
+  "bankPayments": [
+    {
+      "id": "IlJRiEaWTHWjC3Qcq7gvLQ",
+      "organizationId": "07WgjDjARrWDUR0FAqEVEg",
+      "contactId": "FmygskPzQyGK88Te72Vm7w",
+      "createdTime": "2017-06-02T12:16:43",
+      "entryDate": "2017-06-02",
+      "cashAmount": 153.75,
+      "cashSide": "debit",
+      "cashAccountId": "SwPeX7U1T2WWkaNxv0wBEw",
+      "cashExchangeRate": 1,
+      "subjectCurrencyId": "DKK",
+      "feeAmount": null,
+      "feeAccountId": null,
+      "isVoided": false
+    }
+  ]
+}
