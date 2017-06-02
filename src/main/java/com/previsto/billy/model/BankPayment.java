@@ -17,7 +17,7 @@ public class BankPayment extends Entity  {
     private float feeAmount;
     private String feeAccountId;
     private boolean isVoided;
-    private List<Association> association = new ArrayList<>();
+    private List<Association> associations = new ArrayList<>();
 
     public String getContactId() {
         return contactId;
@@ -99,11 +99,11 @@ public class BankPayment extends Entity  {
         isVoided = voided;
     }
 
-    public List<Association> getAssociation() {
-        return association;
+    public List<Association> getAssociations() {
+        return associations;
     }
 
-    public void setAssociation(List<Association> association) {
-        this.association = association;
+    public void setAssociation(List<Association> associations) {
+        this.associations = associations;
     }
 }
