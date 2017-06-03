@@ -81,7 +81,7 @@ public class BillyClient {
         return new AccountResource(restTemplate, serviceUrl);
     }
 
-    public BankPaymentResource getBankPAyBankPaymentResource() {
+    public BankPaymentResource getBankPaymentResource() {
         return new BankPaymentResource(restTemplate, serviceUrl);
     }
 }
