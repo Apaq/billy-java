@@ -67,7 +67,7 @@ public class Organization extends Entity {
     private String defaultSalesTaxRulesetId;
     private LocalDate bankSyncStartDate;
     private String defaultBankFeeAccountId;
-    private String defaultBillAccountId;
+    private String defaultBillBankAccountId;
 
     public String getOwnerUserId() {
         return ownerUserId;
@@ -504,12 +504,12 @@ public class Organization extends Entity {
         this.defaultBankFeeAccountId = defaultBankFeeAccountId;
     }
 
-    public String getDefaultBillAccountId() {
-        return defaultBillAccountId;
+    public String getDefaultBillBankAccountId() {
+        return defaultBillBankAccountId;
     }
 
-    public void setDefaultBillAccountId(String defaultBillAccountId) {
-        this.defaultBillAccountId = defaultBillAccountId;
+    public void setDefaultBillBankAccountId(String defaultBillBankAccountId) {
+        this.defaultBillBankAccountId = defaultBillBankAccountId;
     }
     
 }

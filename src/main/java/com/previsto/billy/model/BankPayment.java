@@ -1,5 +1,7 @@
 package com.previsto.billy.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.previsto.billy.model.enums.CashSide;
 
@@ -9,16 +11,21 @@ import java.util.List;
 
 public class BankPayment extends Entity  {
     private String contactId;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate entryDate;
     private float cashAmount;
-    private CashSide cashSide;
+    private CashSide cashSide = CashSide.Debit;
     private String cashAccountId;
-    private float cashExchangeRate;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
+    private float cashExchangeRate = 1;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String subjectCurrencyId;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     private float feeAmount;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String feeAccountId;
     @JsonProperty("isVoided")
-    private boolean voided;
+    private boolean voided = false;
     private List<Association> associations = new ArrayList<>();
 
     public String getContactId() {

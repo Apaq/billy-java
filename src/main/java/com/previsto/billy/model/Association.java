@@ -4,6 +4,13 @@ public class Association {
 
     private String subjectReference;
 
+    public Association() {
+    }
+
+    public Association(String subjectReference) {
+        this.subjectReference = subjectReference;
+    }
+
     public String getSubjectReference() {
         return subjectReference;
     }

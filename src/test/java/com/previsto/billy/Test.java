@@ -1,11 +1,10 @@
 package com.previsto.billy;
 
-import com.previsto.billy.model.Contact;
-import com.previsto.billy.model.Invoice;
-import com.previsto.billy.model.InvoiceLine;
-import com.previsto.billy.model.Organization;
-import com.previsto.billy.model.Product;
+import com.previsto.billy.model.*;
+import com.previsto.billy.model.enums.CashSide;
 import com.previsto.billy.model.enums.ContactType;
+
+import java.time.LocalDate;
 
 public class Test {
 
@@ -24,7 +23,7 @@ public class Test {
         
         Product product = new Product();
         product.setName("Vinduespolering");
-        product.setProductNo("TEST_CODE");
+        product.setProductNo("TEST_CODE5");
         product.setAccountId(org.getDefaultSalesAccountId());
         //product.setSalesTaxRulesetId(org.getDefaultSalesTaxRulesetId());
         product = client.getProductResource().save(product);
@@ -60,8 +59,22 @@ public class Test {
         System.out.println(invoice);
         
         //client.getInvoiceResource().approve(invoice2.getId());
-        
-        
+
+        client.getInvoiceResource().approve(invoice2.getId());
+
+
+        BankPayment payment = new BankPayment();
+        payment.setContactId(invoice2.getContactId());
+        payment.setEntryDate(LocalDate.now());
+        payment.setSubjectCurrencyId("DKK");
+        payment.setCashSide(CashSide.Debit);
+        payment.setCashAmount(200);
+        payment.setCashAccountId(org.getDefaultBillBankAccountId());
+        payment.getAssociations().add(new Association("invoice:" + invoice2.getId()));
+        client.getBankPaymentResource().save(payment);
+
+        invoice2 = client.getInvoiceResource().get(invoice2.getId());
+
         client.getInvoiceResource().delete(invoice);
         client.getInvoiceResource().delete(invoice2);
         client.getContactResource().delete(contact);
