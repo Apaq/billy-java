@@ -1,5 +1,6 @@
 package com.previsto.billy.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.previsto.billy.model.enums.CashSide;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class BankPayment extends Entity  {
     private String subjectCurrencyId;
     private float feeAmount;
     private String feeAccountId;
+    @JsonProperty("isVoided")
     private boolean isVoided;
     private List<Association> associations = new ArrayList<>();
 
