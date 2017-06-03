@@ -18,7 +18,7 @@ public class BankPayment extends Entity  {
     private float feeAmount;
     private String feeAccountId;
     @JsonProperty("isVoided")
-    private boolean isVoided;
+    private boolean voided;
     private List<Association> associations = new ArrayList<>();
 
     public String getContactId() {
@@ -94,11 +94,11 @@ public class BankPayment extends Entity  {
     }
 
     public boolean isVoided() {
-        return isVoided;
+        return voided;
     }
 
     public void setVoided(boolean voided) {
-        isVoided = voided;
+        this.voided = voided;
     }
 
     public List<Association> getAssociations() {
