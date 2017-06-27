@@ -1,6 +1,6 @@
 # Billy Java Bindings 
 
-You can sign up for a Billy account at https://billy.dk.
+_This client is developed by [Previsto - planning for the service industry](https://previsto.com)_
 
 Requirements
 ============
