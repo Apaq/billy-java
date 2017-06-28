@@ -4,5 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum AttachmentDeliveryMode {
     @JsonProperty("link")
-    Link
+    Link,
+
+    @JsonProperty("linkAndAttachment")
+    LinkAndAttachment
 }
