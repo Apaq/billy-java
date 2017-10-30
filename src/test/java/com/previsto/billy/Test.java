@@ -3,6 +3,8 @@ package com.previsto.billy;
 import com.previsto.billy.model.*;
 import com.previsto.billy.model.enums.CashSide;
 import com.previsto.billy.model.enums.ContactType;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDate;
 
@@ -10,12 +12,12 @@ public class Test {
 
     public static void main(String[] args) {
         
-        BillyClient client = new BillyClient("66d361eea7c89d4f9c4d56ef66b7e9bce20784e7", "https://api.billysbilling.com/v2");
+        BillyClient client = new BillyClient("66d361eea7c89d4f9c4d56ef66b7e9bce20784e7", "https://api.billysbilling.com/v2", true   );
         
         Organization org = client.getOrganizationResource().getCurrent();
         
-        //Page<Contact> contacts = client.getContactResource().findAll(new PageRequest(0, 2));
-        Contact contact = new Contact(ContactType.Company, "Apaq", "DK");
+        Page<Contact> contacts = client.getContactResource().findAll(new PageRequest(0, 2));
+        /*Contact contact = new Contact(ContactType.Company, "Apaq", "DK");
         contact.setSupplier(true);
         contact = client.getContactResource().save(contact);
         
@@ -78,7 +80,7 @@ public class Test {
         client.getInvoiceResource().delete(invoice);
         client.getInvoiceResource().delete(invoice2);
         client.getContactResource().delete(contact);
-        client.getProductResource().delete(product);
+        client.getProductResource().delete(product);*/
         
     }
 }

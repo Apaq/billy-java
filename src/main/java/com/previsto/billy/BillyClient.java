@@ -2,13 +2,20 @@ package com.previsto.billy;
 
 import com.previsto.billy.repository.*;
 
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Collections;
 import org.apache.http.Header;
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
+import org.apache.http.ssl.SSLContextBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -26,6 +33,10 @@ public class BillyClient {
     private final HttpComponentsClientHttpRequestFactory requestFactory;
 
     public BillyClient(String apiKey, String serviceUrl) {
+        this(apiKey, serviceUrl, false);
+    }
+
+    public BillyClient(String apiKey, String serviceUrl, boolean allowUntrustedCert) {
         this.requestFactory = new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
         this.restTemplate = new RestTemplate(this.requestFactory);
         this.restTemplate.setErrorHandler(new ErrorHandler());
@@ -41,8 +52,26 @@ public class BillyClient {
         
         // Apply security
         Header tokenHeader = new BasicHeader(API_KEY_HEADER, apiKey);
-        HttpClient httpClient = HttpClients.custom().setDefaultHeaders(Collections.singleton(tokenHeader)).build();
-        this.requestFactory.setHttpClient(httpClient);
+        SSLConnectionSocketFactory sslsf = null;
+        SSLContextBuilder builder = new SSLContextBuilder();
+
+        try {
+            builder.loadTrustMaterial(null, new TrustSelfSignedStrategy());
+            sslsf = new SSLConnectionSocketFactory(builder.build());
+        } catch (NoSuchAlgorithmException | KeyStoreException | KeyManagementException e) {
+            LOG.error("Unable to create SSL context");
+        }
+
+        HttpClientBuilder clientBuilder = HttpClients.custom();
+        clientBuilder.setDefaultHeaders(Collections.singleton(tokenHeader));
+
+        if(allowUntrustedCert) {
+            clientBuilder.setSSLSocketFactory(sslsf);
+        }
+
+        HttpClient httpClient = clientBuilder.build();
+
+                this.requestFactory.setHttpClient(httpClient);
     }
     
     public void setConnectTimeout(int millis) {
