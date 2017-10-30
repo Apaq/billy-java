@@ -12,7 +12,7 @@ public class Test {
 
     public static void main(String[] args) {
         
-        BillyClient client = new BillyClient("66d361eea7c89d4f9c4d56ef66b7e9bce20784e7", "https://api.billysbilling.com/v2", true);
+        BillyClient client = new BillyClient("66d361eea7c89d4f9c4d56ef66b7e9bce20784e7", "https://api.billysbilling.com/v2", true   );
         
         Organization org = client.getOrganizationResource().getCurrent();
         
