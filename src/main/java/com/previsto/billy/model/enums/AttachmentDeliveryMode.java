@@ -7,5 +7,8 @@ public enum AttachmentDeliveryMode {
     Link,
 
     @JsonProperty("linkAndAttachment")
-    LinkAndAttachment
+    LinkAndAttachment,
+    
+    @JsonProperty("attachment")
+    Attachment
 }
