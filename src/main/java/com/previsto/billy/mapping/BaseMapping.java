@@ -30,6 +30,8 @@ public abstract class BaseMapping<T> {
         if(paging != null) {
             pageable = new PageRequest(paging.page - 1, paging.pageSize);
             total = paging.total;
+        } else {
+            pageable = Pageable.unpaged();
         }
         
         return new PageImpl(entities, pageable, total);

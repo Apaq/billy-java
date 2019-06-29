@@ -2,12 +2,12 @@ package com.previsto.billy.autoconfigure;
 
 import com.previsto.billy.BillyClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.health.ConditionalOnEnabledHealthIndicator;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.boot.actuate.autoconfigure.ConditionalOnEnabledHealthIndicator;
 
 
 @Component
