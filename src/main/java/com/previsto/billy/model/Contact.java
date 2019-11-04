@@ -36,7 +36,7 @@ public class Contact extends ArchivableEntity {
     private boolean supplier;
 
     private PaymentTermsMode paymentTermsMode;
-    private Integer paymentTermsDays;
+    private Integer paymentTermsDays = 8;
 
     private String accessCode;
     private AttachmentDeliveryMode emailAttachmentDeliveryMode;
