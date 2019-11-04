@@ -44,7 +44,7 @@ public class ContactResourceTest extends ResourceTestBase<Contact> {
         List<RequestMatcher> matchers = new ArrayList<>();
         matchers.add(jsonPath("$.contact.isArchived").value(false));
         matchers.add(jsonPath("$.contact.name").isEmpty());
-        matchers.add(jsonPath("$.contact.paymentTermsDays").doesNotExist());
+        matchers.add(jsonPath("$.contact.paymentTermsDays").value(8));
         matchers.add(jsonPath("$.contact.paymentTermsMode").doesNotExist());
         return matchers;
     }
