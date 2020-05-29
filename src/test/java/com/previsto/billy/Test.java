@@ -16,7 +16,7 @@ public class Test {
         
         Organization org = client.getOrganizationResource().getCurrent();
         
-        Page<Contact> contacts = client.getContactResource().findAll(new PageRequest(0, 2));
+        Page<Contact> contacts = client.getContactResource().findAll(PageRequest.of(0, 2));
         /*Contact contact = new Contact(ContactType.Company, "Apaq", "DK");
         contact.setSupplier(true);
         contact = client.getContactResource().save(contact);

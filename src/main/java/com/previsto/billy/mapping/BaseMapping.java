@@ -28,7 +28,7 @@ public abstract class BaseMapping<T> {
         Pageable pageable = null;
         int total = -1;
         if(paging != null) {
-            pageable = new PageRequest(paging.page - 1, paging.pageSize);
+            pageable = PageRequest.of(paging.page - 1, paging.pageSize);
             total = paging.total;
         } else {
             pageable = Pageable.unpaged();
