@@ -1,6 +1,7 @@
 # Billy Java Bindings 
 
 _This client is developed by [Apaq](https://apaq.dk)_
+
 ![Java CI with Maven](https://github.com/Apaq/billy-java/workflows/Java%20CI%20with%20Maven/badge.svg)
 
 Requirements
