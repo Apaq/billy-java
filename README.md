@@ -76,30 +76,4 @@ You must have Maven installed. To run the tests:
     mvn test
 
 
-Deploy Artifact
-=======
-Artifacts are deployed to a secure S3 repository. 
-In order to be able to deploy to it, the correct credentials are required in settings.xml. 
-You set it up like this:
-
-```
-<settings>
-  ...
-  <servers>
-    ...
-    <server>
-      <id>aws-release</id>
-      <username>[ACCESS_KEY]</username>
-      <password>[SECRET_KEY]</password>
-    </server>
-    <server>
-      <id>aws-snapshot</id>
-      <username>[ACCESS_KEY]</username>
-      <password>[SECRET_KEY]</password>
-    </server>
-    ...
-  </servers>
-  ...
-</settings>
-```
 
