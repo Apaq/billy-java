@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.previsto</groupId>
     <artifactId>billy-java</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.2.1</version>
     <packaging>jar</packaging>
     
     <scm>
@@ -20,6 +20,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+    
+        <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>Github Packages</name>
+            <url>https://maven.pkg.github.com/Apaq/billy-java</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
