@@ -18,9 +18,9 @@ Add this dependency to your project's POM:
 
 ```xml
 <dependency>
-  <groupId>com.previsto</groupId>
-  <artifactId>billy.java</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <groupId>dk.apaq</groupId>
+  <artifactId>billy-java</artifactId>
+  <version> <!-- Insert latest version --> </version>
 </dependency>
 ```
 
@@ -40,7 +40,7 @@ billy:
 BillyExample.java
 
 ```java
-import com.previsto.billy.model.Contact;
+import Contact;
 
 @SpringBootApplication
 public class BillyExample {
