@@ -10,6 +10,10 @@ public class ArchivableEntity extends Entity {
         return archived;
     }
 
+    /**
+     * Whether the entity is archived.
+     * @param archived
+     */
     public void setArchived(boolean archived) {
         this.archived = archived;
     }

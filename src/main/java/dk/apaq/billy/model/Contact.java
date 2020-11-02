@@ -69,6 +69,10 @@ public class Contact extends ArchivableEntity {
         return type;
     }
 
+    /**
+     * Whether contact is a company or an person. Defaults to company
+     * @param type
+     */
     public void setType(ContactType type) {
         this.type = type;
     }
@@ -79,6 +83,10 @@ public class Contact extends ArchivableEntity {
         return name;
     }
 
+    /**
+     * The name of the contact. Can be either a company name or a person's name.
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
@@ -87,6 +95,10 @@ public class Contact extends ArchivableEntity {
         return countryId;
     }
 
+    /**
+     * The contact's home/business country.
+     * @param countryId
+     */
     public void setCountryId(String countryId) {
         this.countryId = countryId;
     }
@@ -95,6 +107,10 @@ public class Contact extends ArchivableEntity {
         return cityId;
     }
 
+    /**
+     * The contact's city, if finite.
+     * @param cityId
+     */
     public void setCityId(String cityId) {
         this.cityId = cityId;
     }
@@ -103,6 +119,10 @@ public class Contact extends ArchivableEntity {
         return zipcodeId;
     }
 
+    /**
+     * The contact's zipcode, if finite.
+     * @param zipcodeId
+     */
     public void setZipcodeId(String zipcodeId) {
         this.zipcodeId = zipcodeId;
     }
@@ -111,6 +131,10 @@ public class Contact extends ArchivableEntity {
         return street;
     }
 
+    /**
+     * The contact's street address.
+     * @param street
+     */
     public void setStreet(String street) {
         this.street = street;
     }
@@ -119,6 +143,10 @@ public class Contact extends ArchivableEntity {
         return cityText;
     }
 
+    /**
+     * 	The contact's city, in text form.
+     * @param cityText
+     */
     public void setCityText(String cityText) {
         this.cityText = cityText;
     }
@@ -127,6 +155,10 @@ public class Contact extends ArchivableEntity {
         return stateText;
     }
 
+    /**
+     * The name of the contact's state, in text form.
+     * @param stateText
+     */
     public void setStateText(String stateText) {
         this.stateText = stateText;
     }
@@ -135,6 +167,10 @@ public class Contact extends ArchivableEntity {
         return zipcodeText;
     }
 
+    /**
+     * The contact's zipcode, in text form.
+     * @param zipcodeText
+     */
     public void setZipcodeText(String zipcodeText) {
         this.zipcodeText = zipcodeText;
     }
@@ -143,6 +179,10 @@ public class Contact extends ArchivableEntity {
         return contactNo;
     }
 
+    /**
+     * Arbitrary number (or string) that contacts can be referred to by.
+     * @param contactNo
+     */
     public void setContactNo(String contactNo) {
         this.contactNo = contactNo;
     }
@@ -151,6 +191,10 @@ public class Contact extends ArchivableEntity {
         return phone;
     }
 
+    /**
+     * The contact's phone number.
+     * @param phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -159,6 +203,10 @@ public class Contact extends ArchivableEntity {
         return fax;
     }
 
+    /**
+     * The contact's fax number.
+     * @param fax
+     */
     public void setFax(String fax) {
         this.fax = fax;
     }
@@ -167,6 +215,11 @@ public class Contact extends ArchivableEntity {
         return currencyId;
     }
 
+    /**
+     * Default currency to use for invoices created for the contact. Has no effect in the API, as currency for invoice
+     * always is required.
+     * @param currency
+     */
     public void setCurrencyId(String currency) {
         this.currencyId = currency;
     }
@@ -175,6 +228,10 @@ public class Contact extends ArchivableEntity {
         return registrationNo;
     }
 
+    /**
+     * The contact's EU VAT number, CVR number in Denmark, tax ID (TIN/EIN/SSN) in the US.
+     * @param registrationNo
+     */
     public void setRegistrationNo(String registrationNo) {
         this.registrationNo = registrationNo;
     }
@@ -183,6 +240,11 @@ public class Contact extends ArchivableEntity {
         return localeId;
     }
 
+    /**
+     * Language to use in communications with the contact. The language also decides which language should be used on
+     * invoices created for the contact.
+     * @param localeId
+     */
     public void setLocaleId(String localeId) {
         this.localeId = localeId;
     }
@@ -191,6 +253,10 @@ public class Contact extends ArchivableEntity {
         return ean;
     }
 
+    /**
+     * The contact's EAN (European Article Number).
+     * @param ean
+     */
     public void setEan(String ean) {
         this.ean = ean;
     }
@@ -199,6 +265,10 @@ public class Contact extends ArchivableEntity {
         return customer;
     }
 
+    /**
+     * Whether the contact is regarded as a customer and can have invoices, etc.
+     * @param customer
+     */
     public void setCustomer(boolean customer) {
         this.customer = customer;
     }
@@ -207,6 +277,10 @@ public class Contact extends ArchivableEntity {
         return supplier;
     }
 
+    /**
+     * Whether the contact is regarded as a vendor and can have bills etc.
+     * @param supplier
+     */
     public void setSupplier(boolean supplier) {
         this.supplier = supplier;
     }
@@ -231,6 +305,10 @@ public class Contact extends ArchivableEntity {
         return accessCode;
     }
 
+    /**
+     * Used to generate the contact's customer portal URL.
+     * @param accessCode
+     */
     public void setAccessCode(String accessCode) {
         this.accessCode = accessCode;
     }
@@ -239,6 +317,10 @@ public class Contact extends ArchivableEntity {
         return emailAttachmentDeliveryMode;
     }
 
+    /**
+     * Whether to deliver attachments by link to customer portal or with email attachments.
+     * @param emailAttachmentDeliveryMode
+     */
     public void setEmailAttachmentDeliveryMode(AttachmentDeliveryMode emailAttachmentDeliveryMode) {
         this.emailAttachmentDeliveryMode = emailAttachmentDeliveryMode;
     }
@@ -247,6 +329,11 @@ public class Contact extends ArchivableEntity {
         return contactPersons;
     }
 
+    /**
+     * You can add one or more contact persons for the contact. If this parameter is set, any existing contact persons
+     * for this contact will be deleted before adding the new ones.
+     * @param contactPersons
+     */
     public void setContactPersons(List<ContactPerson> contactPersons) {
         this.contactPersons = contactPersons;
     }

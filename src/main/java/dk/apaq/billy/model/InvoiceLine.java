@@ -22,6 +22,10 @@ public class InvoiceLine {
         return productId;
     }
 
+    /**
+     * The product to use for the line.
+     * @param productId
+     */
     public void setProductId(String productId) {
         this.productId = productId;
     }
@@ -30,6 +34,10 @@ public class InvoiceLine {
         return description;
     }
 
+    /**
+     * Optional description to display under the product's name on the invoice.
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
@@ -38,6 +46,10 @@ public class InvoiceLine {
         return quantity;
     }
 
+    /**
+     * The line's quantity. Defaults to 1.
+     * @param quantity
+     */
     public void setQuantity(float quantity) {
         this.quantity = quantity;
     }
@@ -46,6 +58,10 @@ public class InvoiceLine {
         return unitPrice;
     }
 
+    /**
+     * The price per unit of the product.
+     * @param unitPrice
+     */
     public void setUnitPrice(float unitPrice) {
         this.unitPrice = unitPrice;
     }
@@ -84,6 +100,10 @@ public class InvoiceLine {
         return discountText;
     }
 
+    /**
+     * Text to display if the line includes a discount.
+     * @param discountText
+     */
     public void setDiscountText(String discountText) {
         this.discountText = discountText;
     }
@@ -92,10 +112,21 @@ public class InvoiceLine {
         return discountMode;
     }
 
+    /**
+     * How the discount should be calculated. Cash discount: The value of @discountValue@ will be subtracted from the
+     * line's amount. Percentage discount: The percentage value of @discountValue@ will be subtracted from the line's
+     * amount.
+     * @param discountMode
+     */
     public void setDiscountMode(DiscountMode discountMode) {
         this.discountMode = discountMode;
     }
 
+    /**
+     * Depending on @discountMode@, either an amount or a percentage value. Percentage value should be supplied as e.g.
+     * 25 for 25%. Required if @discountValue@ is set. ignored if @discountValue@ is not set.
+     * @return
+     */
     public Float getDiscountValue() {
         return discountValue;
     }

@@ -81,10 +81,20 @@ public class Invoice extends Entity {
         this.approvedTime = approvedTime;
     }
 
+
+    /**
+     * Retrieves the ID for a contact person belonging to the contact that should be included as Att: in the invoice
+     * address area.
+     * @return contact Id
+     */
     public String getAttContactPersonId() {
         return attContactPersonId;
     }
 
+    /**
+     * Sets the ID for a contact person belonging to the contact that should be included as Att: in the invoice address area.
+     * @param attContactPersonId Id of the att contact.
+     */
     public void setAttContactPersonId(String attContactPersonId) {
         this.attContactPersonId = attContactPersonId;
     }
@@ -99,18 +109,34 @@ public class Invoice extends Entity {
         this.balance = balance;
     }
 
+    /**
+     * Retrieves the ID of the contact to create the invoice for. This property is required.
+     * @return
+     */
     public String getContactId() {
         return contactId;
     }
 
+    /**
+     * Sets the ID of the contact to create the invoice for. This property is required.
+     * @param contactId Id of the contact.
+     */
     public void setContactId(String contactId) {
         this.contactId = contactId;
     }
 
+    /**
+     * Retrieves optional message to the contact, to be displayed at the top of the invoice PDF.
+     * @return
+     */
     public String getContactMessage() {
         return contactMessage;
     }
 
+    /**
+     * Sets optional message to the contact, to be displayed at the top of the invoice PDF.
+     * @param contactMessage
+     */
     public void setContactMessage(String contactMessage) {
         this.contactMessage = contactMessage;
     }
@@ -123,10 +149,18 @@ public class Invoice extends Entity {
         this.creditedInvoiceId = creditedInvoiceId;
     }
 
+    /**
+     * Retrieves the currency of the invoice, fx. 'DKK'. All lines unitPrice properties should be in this currency.
+     * @return
+     */
     public String getCurrencyId() {
         return currencyId;
     }
 
+    /**
+     * Sets the currency of the invoice, fx. 'DKK'. All lines unitPrice properties should be in this currency.
+     * @param currencyId
+     */
     public void setCurrencyId(String currencyId) {
         this.currencyId = currencyId;
     }
@@ -139,38 +173,77 @@ public class Invoice extends Entity {
         this.downloadUrl = downloadUrl;
     }
 
+    /**
+     * Gets the due date for payment of the invoice. This property is readonly.
+     * @return dueDate
+     */
     @JsonIgnore
     public LocalDate getDueDate() {
         return dueDate;
     }
 
+    /**
+     * Set the due date for payment of the invoice. This property is readonly.
+     * @param dueDate
+     */
     @JsonProperty
     @JsonFormat(pattern = "yyyy-MM-dd")
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Gets the invoice entry date.
+     * @return  The entry date.
+     */
     public LocalDate getEntryDate() {
         return entryDate;
     }
 
+    /**
+     * Sets the invoice date. This parameter must not be set if the invoice has already been created. This
+     * property is required.
+     * @param entryDate The entry date.
+     */
     public void setEntryDate(LocalDate entryDate) {
         this.entryDate = entryDate;
     }
 
+    /**
+     * Gets the exchange rate used for invoices in foreign currencies. See {@link #setExchangeRate(float)}.
+     * @return
+     */
     public float getExchangeRate() {
         return exchangeRate;
     }
 
+    /**
+     * The exchange rate used for invoices in foreign currencies. The value should calculated like this:
+     * bq. @exchangeRate@ = @currency@ / @organization's base currency@
+     *
+     * If this field is left blank, then today's exchange rate will automatically be used. If @currencyId@ equals the
+     * organization's base currency, the value of this field is ignored - it will always be 1.
+     * @param exchangeRate
+     */
     public void setExchangeRate(float exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 
+    /**
+     * Get the invoice number. See {@link #setInvoiceNo(String)}.
+     * @return
+     */
     @JsonIgnore
     public String getInvoiceNo() {
         return invoiceNo;
     }
 
+    /**
+     * 	Manually set the invoice number. Invoice numbers has to be unique. If no invoice number is set when the
+     * 	invoice is created, it will automatically be assigned a number using the company's invoice number model.
+     * 	This parameter must not be set if the invoice has already been created.
+     * @param invoiceNo
+     */
     @JsonProperty
     public void setInvoiceNo(String invoiceNo) {
         this.invoiceNo = invoiceNo;
@@ -202,10 +275,18 @@ public class Invoice extends Entity {
         this.orderNo = orderNo;
     }
 
+    /**
+     * Get number of days (positive or negative) for the mode defined by paymentTermsMode
+     * @return
+     */
     public Integer getPaymentTermsDays() {
         return paymentTermsDays;
     }
 
+    /**
+     * Number of days (positive or negative) for the mode defined by paymentTermsMode
+     * @param paymentTermsDays
+     */
     public void setPaymentTermsDays(Integer paymentTermsDays) {
         this.paymentTermsDays = paymentTermsDays;
     }
@@ -228,10 +309,18 @@ public class Invoice extends Entity {
         this.recurringInvoiceId = recurringInvoiceId;
     }
 
+    /**
+     * Get the sent state of the email. See {@link #setSentState(InvoiceSentState)}.
+     * @return
+     */
     public InvoiceSentState getSentState() {
         return sentState;
     }
 
+    /**
+     * Sent state of the email. Invoice is marked as Unsent by default, can be marked as Printed, Sent, Opened, Viewed.
+     * @param sentState
+     */
     public void setSentState(InvoiceSentState sentState) {
         this.sentState = sentState;
     }
@@ -241,6 +330,11 @@ public class Invoice extends Entity {
         return state;
     }
 
+    /**
+     * Used to change the state of the invoice. Currently the only state change possible is from draft to approved.
+     * Once an invoice has been approved, its state can't be changed. This property is required. Defaults to Draft.
+     * @param state
+     */
     @JsonProperty
     public void setState(InvoiceState state) {
         this.state = state;
@@ -264,10 +358,20 @@ public class Invoice extends Entity {
         this.taxMode = taxMode;
     }
 
+    /**
+     * Sets lines for the invoice. See {@link #setLines(List)}.
+     * @return
+     */
     public List<InvoiceLine> getLines() {
         return lines;
     }
 
+    /**
+     * Lines for the invoice. At minimum, one line must be supplied. If this parameter is set, any existing lines for
+     * this invoice will be deleted before adding the new ones. This parameter must not be set if the invoice has
+     * already been created.
+     * @param lines
+     */
     public void setLines(List<InvoiceLine> lines) {
         this.lines = lines;
     }
@@ -277,6 +381,10 @@ public class Invoice extends Entity {
         return attachments;
     }
 
+    /**
+     * Attachments for the invoice.
+     * @param attachments
+     */
     public void setAttachments(List<InvoiceAttachment> attachments) {
         this.attachments = attachments;
     }
@@ -295,6 +403,10 @@ public class Invoice extends Entity {
         return balanceModifiers;
     }
 
+    /**
+     * Payment associations for the invoice.
+     * @param balanceModifiers
+     */
     @JsonProperty
     public void setBalanceModifiers(List<BalanceModifier> balanceModifiers) {
         this.balanceModifiers = balanceModifiers;
@@ -304,6 +416,10 @@ public class Invoice extends Entity {
         return type;
     }
 
+    /**
+     * Whether to create an invoice or a credit note. Defaults to @invoice@. This property is immutable.
+     * @param type The type of invoice.
+     */
     public void setType(InvoiceType type) {
         this.type = type;
     }

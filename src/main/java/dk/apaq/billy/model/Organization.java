@@ -83,6 +83,10 @@ public class Organization extends Entity {
         return createdTime;
     }
 
+    /**
+     * When the organization was created
+     * @param createdTime
+     */
     @JsonProperty
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     public void setCreatedTime(LocalDateTime createdTime) {
@@ -183,6 +187,10 @@ public class Organization extends Entity {
         return logoFileId;
     }
 
+    /**
+     * Organization logo.
+     * @param logoFileId
+     */
     public void setLogoFileId(String logoFileId) {
         this.logoFileId = logoFileId;
     }
@@ -192,6 +200,10 @@ public class Organization extends Entity {
         return logoPdfFileId;
     }
 
+    /**
+     * Logo file to be used with PDFs.
+     * @param logoPdfFileId
+     */
     @JsonProperty
     public void setLogoPdfFileId(String logoPdfFileId) {
         this.logoPdfFileId = logoPdfFileId;
@@ -202,6 +214,10 @@ public class Organization extends Entity {
         return logoUrl;
     }
 
+    /**
+     * Full-size logo URL
+     * @param logoUrl
+     */
     @JsonProperty
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
@@ -211,6 +227,10 @@ public class Organization extends Entity {
         return iconFileId;
     }
 
+    /**
+     * Organization icon.
+     * @param iconFileId
+     */
     public void setIconFileId(String iconFileId) {
         this.iconFileId = iconFileId;
     }
@@ -220,6 +240,10 @@ public class Organization extends Entity {
         return iconUrl;
     }
 
+    /**
+     * Full-size icon URL
+     * @param iconUrl
+     */
     @JsonProperty
     public void setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
@@ -230,6 +254,10 @@ public class Organization extends Entity {
         return icon48Url;
     }
 
+    /**
+     * 48x48 pixels icon URL
+     * @param icon48Url
+     */
     @JsonProperty
     public void setIcon48Url(String icon48Url) {
         this.icon48Url = icon48Url;
@@ -263,6 +291,10 @@ public class Organization extends Entity {
         return hasBillVoucherNo;
     }
 
+    /**
+     * Whether or not the company has a bill voucher number
+     * @param hasBillVoucherNo
+     */
     public void setHasBillVoucherNo(boolean hasBillVoucherNo) {
         this.hasBillVoucherNo = hasBillVoucherNo;
     }
@@ -287,6 +319,10 @@ public class Organization extends Entity {
         return subscriptionTransactionId;
     }
 
+    /**
+     * The transaction for the company's recurring subscription.
+     * @param subscriptionTransactionId
+     */
     public void setSubscriptionTransactionId(String subscriptionTransactionId) {
         this.subscriptionTransactionId = subscriptionTransactionId;
     }
@@ -345,6 +381,10 @@ public class Organization extends Entity {
         return terminated;
     }
 
+    /**
+     * When the company was terminated
+     * @param terminated
+     */
     public void setTerminated(boolean terminated) {
         this.terminated = terminated;
     }
@@ -364,6 +404,10 @@ public class Organization extends Entity {
         return localeId;
     }
 
+    /**
+     * The organization's default language. Will be used for all contacts unless overridden on a contact level.
+     * @param localeId
+     */
     public void setLocaleId(String localeId) {
         this.localeId = localeId;
     }
@@ -373,6 +417,10 @@ public class Organization extends Entity {
         return billEmailAddress;
     }
 
+    /**
+     * An email can be sent to this address and its attachments will be processed into bills
+     * @param billEmailAddress
+     */
     public void setBillEmailAddress(String billEmailAddress) {
         this.billEmailAddress = billEmailAddress;
     }
@@ -382,6 +430,10 @@ public class Organization extends Entity {
         return unmigrated;
     }
 
+    /**
+     * If this is true, the company has not yet migrated to our new system.
+     * @param unmigrated
+     */
     @JsonProperty("isUnmigrated")
     public void setUnmigrated(boolean unmigrated) {
         this.unmigrated = unmigrated;
@@ -392,6 +444,10 @@ public class Organization extends Entity {
         return locked;
     }
 
+    /**
+     * If this is true, the company is locked.
+     * @param locked
+     */
     @JsonProperty("isLocked")
     public void setLocked(boolean locked) {
         this.locked = locked;
@@ -402,6 +458,10 @@ public class Organization extends Entity {
         return lockedReason;
     }
 
+    /**
+     * Reason the company is currently locked.
+     * @param lockedReason
+     */
     @JsonProperty
     public void setLockedReason(String lockedReason) {
         this.lockedReason = lockedReason;
@@ -421,6 +481,10 @@ public class Organization extends Entity {
         return emailAttachmentDeliveryMode;
     }
 
+    /**
+     * Whether to deliver attachments by link to customer portal, or with email attachments.
+     * @param emailAttachmentDeliveryMode
+     */
     public void setEmailAttachmentDeliveryMode(AttachmentDeliveryMode emailAttachmentDeliveryMode) {
         this.emailAttachmentDeliveryMode = emailAttachmentDeliveryMode;
     }
