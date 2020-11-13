@@ -40,6 +40,10 @@ public abstract class ResourceTestBase<T extends Entity> {
     }
     
     protected abstract String generateSingularId();
+    protected T generatePersistenceEntity() throws ReflectiveOperationException {
+        return (T) type.newInstance();
+    }
+
     protected abstract String generateExpectedGetQueryParams();
     protected abstract DefaultResponseCreator generateExpectedGetResponse();
     protected abstract DefaultResponseCreator generateExpectedFindAllResponse();
@@ -94,7 +98,7 @@ public abstract class ResourceTestBase<T extends Entity> {
         System.out.println("save");
         String id = generateSingularId();
         
-        T entity = (T) type.newInstance();
+        T entity = generatePersistenceEntity();
         entity.setId(id);
         ResponseActions actions = mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/" + id)).andExpect(method(HttpMethod.PUT));
         

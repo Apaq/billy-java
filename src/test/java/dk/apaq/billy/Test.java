@@ -9,11 +9,14 @@ public class Test {
 
     public static void main(String[] args) {
         
-        BillyClient client = new BillyClient("66d361eea7c89d4f9c4d56ef66b7e9bce20784e7", "https://api.billysbilling.com/v2", true   );
-        
+        BillyClient client = new BillyClient("40ef845e70e0c417cc184efd915e8d36bebf9ced", "https://api.billysbilling.com/v2", true   );
+
         Organization org = client.getOrganizationResource().getCurrent();
         
-        Page<Contact> contacts = client.getContactResource().findAll(PageRequest.of(0, 2));
+        Page<Contact> contacts = client.getContactResource().findAll(PageRequest.of(192, 100));
+        System.out.println(contacts.getContent().get(0).getCreatedTime());
+        System.out.println(contacts.getContent().get(0).getName());
+        System.out.println(contacts.getTotalElements());
         /*Contact contact = new Contact(ContactType.Company, "Apaq", "DK");
         contact.setSupplier(true);
         contact = client.getContactResource().save(contact);

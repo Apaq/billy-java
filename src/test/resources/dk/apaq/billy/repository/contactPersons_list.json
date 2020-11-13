@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "statusCode": 200,
+    "success": true,
+    "paging": {
+      "page": 1,
+      "pageSize": 100,
+      "pageCount": 1,
+      "total": 2
+    },
+    "time": 0.020846128463745
+  },
+  "contactPersons": [
+    {
+      "id": "xv1MBXjMQvmwdRcWvqze3A",
+      "contactId": "x7hHlzRkTdavUvtzrKUzRg",
+      "isPrimary": false,
+      "name": "Brian Philip",
+      "email": "brian.philip@previsto.com"
+    },
+    {
+      "id": "zTW5wbnbTAi0im12veoEDg",
+      "contactId": "x7hHlzRkTdavUvtzrKUzRg",
+      "isPrimary": false,
+      "name": "Michael Krog",
+      "email": "michael.krog@previsto.com"
+    }
+  ]
+}
