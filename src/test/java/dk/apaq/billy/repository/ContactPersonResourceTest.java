@@ -1,12 +1,10 @@
 package dk.apaq.billy.repository;
 
-import dk.apaq.billy.model.Contact;
 import dk.apaq.billy.model.ContactPerson;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.RequestMatcher;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
