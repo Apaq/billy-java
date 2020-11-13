@@ -46,10 +46,18 @@ public class ContactPerson extends Entity {
         this.email = email;
     }
 
+    /**
+     * Retrieves the id of the contact this contact person belongs to.
+     * @return
+     */
     public String getContactId() {
         return contactId;
     }
 
+    /**
+     * Sets the id of the contact this contact person belongs to.
+     * @param contactId
+     */
     public void setContactId(String contactId) {
         this.contactId = contactId;
     }
