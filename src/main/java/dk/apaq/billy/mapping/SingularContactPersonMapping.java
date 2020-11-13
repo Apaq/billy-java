@@ -1,7 +1,7 @@
-package com.previsto.billy.mapping;
+package dk.apaq.billy.mapping;
 
-import com.previsto.billy.model.Contact;
-import com.previsto.billy.model.ContactPerson;
+import dk.apaq.billy.model.Contact;
+import dk.apaq.billy.model.ContactPerson;
 
 public class SingularContactPersonMapping extends BaseMapping<ContactPerson> implements SingularMapping<ContactPerson> {
     private ContactPerson contactPerson;

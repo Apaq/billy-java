@@ -1,8 +1,9 @@
-package com.previsto.billy.repository;
+package dk.apaq.billy.repository;
 
-import com.previsto.billy.mapping.*;
-import com.previsto.billy.model.Contact;
-import com.previsto.billy.model.ContactPerson;
+import dk.apaq.billy.mapping.PersistContactPersonMapping;
+import dk.apaq.billy.mapping.PluralContactPersonMapping;
+import dk.apaq.billy.mapping.SingularContactPersonMapping;
+import dk.apaq.billy.model.ContactPerson;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
