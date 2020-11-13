@@ -93,9 +93,13 @@ public class BillyClient {
     public OrganizationResource getOrganizationResource() {
         return new OrganizationResource(restTemplate, serviceUrl);
     }
-    
+
     public ContactResource getContactResource() {
         return new ContactResource(restTemplate, serviceUrl);
+    }
+
+    public ContactPersonResource  getContactPersonResource() {
+        return new ContactPersonResource(restTemplate, serviceUrl);
     }
     
     public InvoiceResource getInvoiceResource() {

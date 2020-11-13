@@ -8,6 +8,7 @@ public class ContactPerson extends Entity {
     private boolean primary;
     private String name;
     private String email;
+    private String contactId;
 
     public boolean isPrimary() {
         return primary;
@@ -44,6 +45,14 @@ public class ContactPerson extends Entity {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
+    public String getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(String contactId) {
+        this.contactId = contactId;
+    }
+
     
 }

@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "statusCode": 200,
+    "success": true,
+    "time": 0.021759986877441
+  },
+  "contactPerson": {
+    "id": "xv1MBXjMQvmwdRcWvqze3A",
+    "contactId": "x7hHlzRkTdavUvtzrKUzRg",
+    "isPrimary": false,
+    "name": "Brian Philip",
+    "email": "brian.philip@previsto.com"
+  }
+}
