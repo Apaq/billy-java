@@ -4,3 +4,4 @@ nb-configuration.xml
 nbproject
 **/DS_Store
 .idea
+.DS_Store
