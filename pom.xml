@@ -7,9 +7,9 @@
     <packaging>jar</packaging>
     
     <scm>
-        <connection>scm:git:https://github.com/Previsto/billy-java.git</connection>
-        <developerConnection>scm:git:git@github.com:Previsto/billy-java.git</developerConnection>
-        <url>https://github.com/Previsto/billy-java</url>
+        <connection>scm:git:https://github.com/Apaq/billy-java.git</connection>
+        <developerConnection>scm:git:git@github.com:Apaq/billy-java.git</developerConnection>
+        <url>https://github.com/Apaq/billy-java</url>
       <tag>HEAD</tag>
   </scm>
 
@@ -143,7 +143,7 @@
                 <version>0.7.5.201505241946</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/previsto/billy/model/**</exclude>
+                        <exclude>dk/apaq/billy/model/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
