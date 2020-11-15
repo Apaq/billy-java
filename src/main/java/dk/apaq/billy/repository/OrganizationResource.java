@@ -20,15 +20,20 @@ public class OrganizationResource extends Resource<Organization>{
     //    SIDELOAD_PARAMS.put("include", "organization.lines:embed");
     }
     
-    public OrganizationResource(RestTemplate restTemplate, String serviceUrl) {
-        super(SingularOrganizationMapping.class, PluralOrganizationMapping.class, PersistOrganizationMapping.class, "organizations", restTemplate, serviceUrl, SIDELOAD_PARAMS);
+    public OrganizationResource(RestTemplate restTemplate, String serviceUrl, String organizationId) {
+        super(SingularOrganizationMapping.class, PluralOrganizationMapping.class, PersistOrganizationMapping.class,
+                "organizations", restTemplate, serviceUrl, SIDELOAD_PARAMS, organizationId);
     }
     
     public Organization getCurrent() {
         URI url;
     
         try {
-            url = new URI(serviceUrl + "/organization");
+            if(organizationId == null) {
+                url = new URI(serviceUrl + "/organization");
+            } else {
+                url = new URI(serviceUrl + "/organizations/" + organizationId);
+            }
         } catch (URISyntaxException ex) {
             throw new IllegalArgumentException("Url is not valid.", ex);
         }

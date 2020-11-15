@@ -1,10 +1,15 @@
 package dk.apaq.billy.repository;
 
+import dk.apaq.billy.model.ContactPerson;
+import dk.apaq.billy.model.Email;
 import dk.apaq.billy.model.Invoice;
 import dk.apaq.billy.model.enums.InvoiceState;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Test;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -15,7 +20,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class InvoiceResourceTest extends ResourceTestBase<Invoice> {
 
     public InvoiceResourceTest() {
-        super(new InvoiceResource(buildRestTemplate(), "http://server/Api"), Invoice.class);
+        super(new InvoiceResource(buildRestTemplate(), "http://server/Api", null), Invoice.class);
     }
 
     @Override
@@ -67,6 +72,44 @@ public class InvoiceResourceTest extends ResourceTestBase<Invoice> {
             return;
         }
         throw new RuntimeException("Unexpected contact entity [id=" + entity.getId() + "]");
+    }
+
+    @Test
+    public void testApprove() {
+        // Arrange
+        System.out.println("approve");
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/123"))
+                .andExpect(method(HttpMethod.PUT))
+                .andExpect(jsonPath("$.invoice.state").value("approved"))
+                .andRespond(generateExpectedFindAllResponse());
+
+        // Act
+        ((InvoiceResource) resource).approve("123");
+
+        // Assert
+        mockServer.verify();
+    }
+
+    @Test
+    public void testSend() {
+        // Arrange
+        System.out.println("approve");
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + "/123/emails"))
+                .andExpect(method(HttpMethod.POST))
+                .andExpect(jsonPath("$.email.emailSubject").value("subject"))
+                .andExpect(jsonPath("$.email.emailBody").value("body"))
+                .andExpect(jsonPath("$.email.contactPersonId").value("231"))
+                .andRespond(generateExpectedFindAllResponse());
+        Email email = new Email();
+        email.setContactPersonId("231");
+        email.setEmailSubject("subject");
+        email.setEmailBody("body");
+
+        // Act
+        ((InvoiceResource) resource).send("123", email);
+
+        // Assert
+        mockServer.verify();
     }
 
 }

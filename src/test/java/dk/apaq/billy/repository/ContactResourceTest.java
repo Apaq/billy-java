@@ -5,6 +5,10 @@ import dk.apaq.billy.model.Contact;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import dk.apaq.billy.model.ContactPerson;
+import org.junit.Test;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -15,7 +19,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class ContactResourceTest extends ResourceTestBase<Contact> {
 
     public ContactResourceTest() {
-        super(new ContactResource(buildRestTemplate(), "http://server/Api"), Contact.class);
+        super(new ContactResource(buildRestTemplate(), "http://server/Api", null), Contact.class);
     }
 
     @Override

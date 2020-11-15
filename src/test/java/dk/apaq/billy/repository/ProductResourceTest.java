@@ -13,7 +13,7 @@ import org.springframework.test.web.client.RequestMatcher;
 public class ProductResourceTest extends ResourceTestBase<Product> {
 
     public ProductResourceTest() {
-        super(new ProductResource(buildRestTemplate(), "http://server/Api"), Product.class);
+        super(new ProductResource(buildRestTemplate(), "http://server/Api", null), Product.class);
     }
 
     @Override

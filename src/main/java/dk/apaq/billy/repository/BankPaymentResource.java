@@ -14,8 +14,9 @@ public class BankPaymentResource extends Resource<BankPayment>{
     private static final Map<String, String> SIDELOAD_PARAMS = new HashMap<>();
 
 
-    public BankPaymentResource(RestTemplate restTemplate, String serviceUrl) {
-        super(SingularBankPaymentMapping.class, PluralBankPaymentMapping.class, PersistBankPaymentMapping.class, "bankPayments", restTemplate, serviceUrl, SIDELOAD_PARAMS);
+    public BankPaymentResource(RestTemplate restTemplate, String serviceUrl, String organizationId) {
+        super(SingularBankPaymentMapping.class, PluralBankPaymentMapping.class, PersistBankPaymentMapping.class,
+                "bankPayments", restTemplate, serviceUrl, SIDELOAD_PARAMS, organizationId);
     }
     
 }

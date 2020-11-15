@@ -2,6 +2,6 @@ target
 nbactions.xml
 nb-configuration.xml
 nbproject
-**/DS_Store
+**/.DS_Store
 .idea
 .DS_Store
