@@ -66,7 +66,7 @@ public class BillyExample {
 ```
 
 
-See [Test.java](https://github.com/Previsto/billy-java/blob/master/src/test/java/com/previsto/billy/Test.java) for more examples.
+See [Test.java](https://github.com/Apaq/billy-java/blob/master/src/test/java/dk/apaq/billy/Test.java) for more examples.
 
 Testing
 =======
