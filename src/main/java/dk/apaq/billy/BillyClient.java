@@ -36,9 +36,15 @@ public class BillyClient {
     public BillyClient(String apiKey, String serviceUrl) {
         this(apiKey, serviceUrl, false);
     }
+
+    public BillyClient(String organizationId, String apiKey, String serviceUrl) {
+        this(organizationId, apiKey, serviceUrl, false);
+    }
+
     public BillyClient(String apiKey, String serviceUrl, boolean allowUntrustedCert) {
         this(null, apiKey, serviceUrl, allowUntrustedCert);
     }
+
     public BillyClient(String organizationId, String apiKey, String serviceUrl, boolean allowUntrustedCert) {
         this.requestFactory = new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
         this.restTemplate = new RestTemplate(this.requestFactory);

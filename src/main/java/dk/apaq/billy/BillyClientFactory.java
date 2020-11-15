@@ -15,4 +15,7 @@ public class BillyClientFactory {
     public BillyClient create(String apiKey) {
         return new BillyClient(apiKey, serviceUrl);
     }
+    public BillyClient create(String organizationId, String apiKey) {
+        return new BillyClient(organizationId, apiKey, serviceUrl);
+    }
 }
