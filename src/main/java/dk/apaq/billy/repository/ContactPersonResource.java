@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ContactPersonResource extends Resource<ContactPerson>{
@@ -23,5 +24,9 @@ public class ContactPersonResource extends Resource<ContactPerson>{
 
     public Page<ContactPerson> findAllByContactId(String contactId, PageRequest pageRequest) {
         return findAll(pageRequest, Collections.singletonMap("contactId", contactId));
+    }
+
+    public List<ContactPerson> findAllByContactId(String contactId) {
+        return findAll(null, Collections.singletonMap("contactId", contactId)).getContent();
     }
 }

@@ -34,7 +34,7 @@ public abstract class Resource<T extends Persistable<String>> {
     protected Class<? extends PluralMapping<T>> pluralClass;
     protected String resourceName;
     protected Map<String, String> sideloadParams;
-    protected final String organizationId;
+    protected String organizationId;
 
     public Resource(Class<? extends SingularMapping<T>> singularClass, Class<? extends PluralMapping<T>> pluralClass, 
             Class<? extends PersistMapping<T>> persistClass, String resourceName, RestTemplate restTemplate, String serviceUrl, 

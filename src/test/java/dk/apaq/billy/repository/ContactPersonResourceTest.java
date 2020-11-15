@@ -1,6 +1,10 @@
 package dk.apaq.billy.repository;
 
 import dk.apaq.billy.model.ContactPerson;
+import org.junit.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.client.RequestMatcher;
 import org.springframework.test.web.client.response.DefaultResponseCreator;
@@ -9,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 public class ContactPersonResourceTest extends ResourceTestBase<ContactPerson> {
@@ -70,6 +74,20 @@ public class ContactPersonResourceTest extends ResourceTestBase<ContactPerson> {
         }
 
         throw new RuntimeException("Unexpected contact entity [id=" + entity.getId() + "]");
+    }
+
+    @Test
+    public void testFindAllByContactId() {
+        System.out.println("findAllByContactId");
+        String queryParams = "?contactId=123";
+        mockServer.expect(requestTo(resource.serviceUrl + "/" + resourceName + queryParams)).andExpect(method(HttpMethod.GET))
+                .andRespond(generateExpectedFindAllResponse());
+        List<ContactPerson> entities = ((ContactPersonResource) resource).findAllByContactId("123");
+        for(ContactPerson entity : entities) {
+            doCheckEntity(entity);
+        }
+
+        mockServer.verify();
     }
 
 }
