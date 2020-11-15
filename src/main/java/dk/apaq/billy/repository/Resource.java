@@ -34,10 +34,11 @@ public abstract class Resource<T extends Persistable<String>> {
     protected Class<? extends PluralMapping<T>> pluralClass;
     protected String resourceName;
     protected Map<String, String> sideloadParams;
+    protected String organizationId;
 
     public Resource(Class<? extends SingularMapping<T>> singularClass, Class<? extends PluralMapping<T>> pluralClass, 
             Class<? extends PersistMapping<T>> persistClass, String resourceName, RestTemplate restTemplate, String serviceUrl, 
-            Map<String, String> sideloadParams) {
+            Map<String, String> sideloadParams, String organizationId) {
         this.singularClass = singularClass;
         this.pluralClass = pluralClass;
         this.persistClass = persistClass;
@@ -45,6 +46,7 @@ public abstract class Resource<T extends Persistable<String>> {
         this.restTemplate = restTemplate;
         this.serviceUrl = serviceUrl;
         this.sideloadParams = sideloadParams == null ? Collections.EMPTY_MAP : sideloadParams;
+        this.organizationId = organizationId;
     }
 
     public List<T> findAll() {
@@ -52,6 +54,10 @@ public abstract class Resource<T extends Persistable<String>> {
     }
 
     public Page<T> findAll(PageRequest pageRequest) {
+        return findAll(pageRequest, Collections.EMPTY_MAP);
+    }
+
+    protected Page<T> findAll(PageRequest pageRequest, Map<String, String> params) {
         URI url = buildUri();
         ParameterizedTypeReference<List<T>> responseType = new ParameterizedTypeReference<List<T>>() {
             @Override
@@ -65,8 +71,16 @@ public abstract class Resource<T extends Persistable<String>> {
             builder.queryParam("page", pageRequest.getPageNumber() + 1);
             builder.queryParam("pageSize", pageRequest.getPageSize());
         }
+
+        if(organizationId != null) {
+            builder.queryParam("organizationId", organizationId);
+        }
         
         for (Map.Entry<String, String> entry : sideloadParams.entrySet()) {
+            builder.queryParam(entry.getKey(), entry.getValue());
+        }
+
+        for (Map.Entry<String, String> entry : params.entrySet()) {
             builder.queryParam(entry.getKey(), entry.getValue());
         }
 

@@ -16,8 +16,9 @@ public class AccountResource extends Resource<Account>{
         SIDELOAD_PARAMS.put("include", "account.group");
     }
 
-    public AccountResource(RestTemplate restTemplate, String serviceUrl) {
-        super(SingularAccountMapping.class, PluralAccountMapping.class, PersistAccountMapping.class, "accounts", restTemplate, serviceUrl, SIDELOAD_PARAMS);
+    public AccountResource(RestTemplate restTemplate, String serviceUrl, String organizationId) {
+        super(SingularAccountMapping.class, PluralAccountMapping.class, PersistAccountMapping.class,
+                "accounts", restTemplate, serviceUrl, SIDELOAD_PARAMS, organizationId);
     }
     
 }

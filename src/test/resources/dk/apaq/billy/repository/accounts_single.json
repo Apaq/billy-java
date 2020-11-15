@@ -24,5 +24,18 @@
     "bankAccountNo": null,
     "bankSwift": null,
     "bankIban": null
-  }
+  },
+  "accountGroups": [
+    {
+      "id": "gvlgDonjQFSgqCIJoqB5bw",
+      "organizationId": "07WgjDjARrWDUR0FAqEVEg",
+      "accountNo": 7200,
+      "name": "Skyldig moms",
+      "type": "group",
+      "natureId": "liability",
+      "sumFrom": null,
+      "style": null,
+      "priority": 0
+    }
+  ]
 }

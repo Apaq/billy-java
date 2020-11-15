@@ -1,6 +1,7 @@
 package dk.apaq.billy;
 
 import dk.apaq.billy.model.Contact;
+import dk.apaq.billy.model.ContactPerson;
 import dk.apaq.billy.model.Organization;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,14 +10,17 @@ public class Test {
 
     public static void main(String[] args) {
         
-        BillyClient client = new BillyClient("40ef845e70e0c417cc184efd915e8d36bebf9ced", "https://api.billysbilling.com/v2", true   );
+        BillyClient client = new BillyClient("JKInPyfrSlqIgW5T5FeubQ", "6c5acc6927fd6593e6bfb5ccda545d98d7755718", "https://api.billysbilling.com/v2", true   );
 
         Organization org = client.getOrganizationResource().getCurrent();
-        
-        Page<Contact> contacts = client.getContactResource().findAll(PageRequest.of(192, 100));
-        System.out.println(contacts.getContent().get(0).getCreatedTime());
-        System.out.println(contacts.getContent().get(0).getName());
-        System.out.println(contacts.getTotalElements());
+        System.out.println("org: " + org.getName());
+
+        Page<Contact> contacts = client.getContactResource().findAll(PageRequest.of(0, 100));
+        System.out.println("contact[0]: " + contacts.getContent().get(0).getName());
+
+        Page<ContactPerson> contactPersons = client.getContactPersonResource().findAllByContactId(contacts.getContent().get(0).getId(), PageRequest.of(0,10));
+        System.out.println("contactPerson[0]: " + contactPersons.getContent().get(0).getName());
+
         /*Contact contact = new Contact(ContactType.Company, "Apaq", "DK");
         contact.setSupplier(true);
         contact = client.getContactResource().save(contact);

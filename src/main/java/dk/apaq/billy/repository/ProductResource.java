@@ -15,8 +15,9 @@ public class ProductResource extends Resource<Product>{
     static {
     }
     
-    public ProductResource(RestTemplate restTemplate, String serviceUrl) {
-        super(SingularProductMapping.class, PluralProductMapping.class, PersistProductMapping.class, "products", restTemplate, serviceUrl, SIDELOAD_PARAMS);
+    public ProductResource(RestTemplate restTemplate, String serviceUrl, String organizationId) {
+        super(SingularProductMapping.class, PluralProductMapping.class, PersistProductMapping.class,
+                "products", restTemplate, serviceUrl, SIDELOAD_PARAMS, organizationId);
     }
     
 }
