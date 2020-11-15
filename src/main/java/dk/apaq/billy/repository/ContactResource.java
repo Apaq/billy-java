@@ -16,8 +16,9 @@ public class ContactResource extends Resource<Contact>{
         SIDELOAD_PARAMS.put("include", "contact.city,contact.zipcode,contact.contactPersons:embed");
     }
     
-    public ContactResource(RestTemplate restTemplate, String serviceUrl) {
-        super(SingularContactMapping.class, PluralContactMapping.class, PersistContactMapping.class, "contacts", restTemplate, serviceUrl, SIDELOAD_PARAMS);
+    public ContactResource(RestTemplate restTemplate, String serviceUrl, String organizationId) {
+        super(SingularContactMapping.class, PluralContactMapping.class, PersistContactMapping.class,
+                "contacts", restTemplate, serviceUrl, SIDELOAD_PARAMS, organizationId);
     }
     
 }

@@ -14,7 +14,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class AccountResourceTest extends ResourceTestBase<Account> {
 
     public AccountResourceTest() {
-        super(new AccountResource(buildRestTemplate(), "http://server/Api"), Account.class);
+        super(new AccountResource(buildRestTemplate(), "http://server/Api", null), Account.class);
     }
 
     @Override

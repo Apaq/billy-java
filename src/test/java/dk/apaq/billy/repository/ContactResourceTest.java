@@ -15,7 +15,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class ContactResourceTest extends ResourceTestBase<Contact> {
 
     public ContactResourceTest() {
-        super(new ContactResource(buildRestTemplate(), "http://server/Api"), Contact.class);
+        super(new ContactResource(buildRestTemplate(), "http://server/Api", null), Contact.class);
     }
 
     @Override

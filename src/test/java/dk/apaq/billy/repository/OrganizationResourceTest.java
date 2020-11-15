@@ -14,7 +14,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 public class OrganizationResourceTest extends ResourceTestBase<Organization> {
 
     public OrganizationResourceTest() {
-        super(new OrganizationResource(buildRestTemplate(), "http://server/Api"), Organization.class);
+        super(new OrganizationResource(buildRestTemplate(), "http://server/Api", null), Organization.class);
     }
 
     @Override

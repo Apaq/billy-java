@@ -30,22 +30,24 @@ public class BillyClient {
     private final RestTemplate restTemplate;
     private final String serviceUrl;
     private final String apiKey;
+    private final String organizationId;
     private final HttpComponentsClientHttpRequestFactory requestFactory;
 
     public BillyClient(String apiKey, String serviceUrl) {
         this(apiKey, serviceUrl, false);
     }
-
     public BillyClient(String apiKey, String serviceUrl, boolean allowUntrustedCert) {
+        this(null, apiKey, serviceUrl, allowUntrustedCert);
+    }
+    public BillyClient(String organizationId, String apiKey, String serviceUrl, boolean allowUntrustedCert) {
         this.requestFactory = new HttpComponentsClientHttpRequestFactory(HttpClients.createDefault());
         this.restTemplate = new RestTemplate(this.requestFactory);
         this.restTemplate.setErrorHandler(new ErrorHandler());
         this.serviceUrl = serviceUrl;
         this.apiKey = apiKey;
-
+        this.organizationId = organizationId;
         //RestTemplateHelper.configureForBillyJargon(restTemplate);
 
-        
         //Apply default timeouts
         this.requestFactory.setConnectTimeout(10000);
         this.requestFactory.setReadTimeout(10000);
@@ -70,8 +72,7 @@ public class BillyClient {
         }
 
         HttpClient httpClient = clientBuilder.build();
-
-                this.requestFactory.setHttpClient(httpClient);
+        this.requestFactory.setHttpClient(httpClient);
     }
     
     public void setConnectTimeout(int millis) {
@@ -91,30 +92,30 @@ public class BillyClient {
     }
 
     public OrganizationResource getOrganizationResource() {
-        return new OrganizationResource(restTemplate, serviceUrl);
+        return new OrganizationResource(restTemplate, serviceUrl, organizationId);
     }
 
     public ContactResource getContactResource() {
-        return new ContactResource(restTemplate, serviceUrl);
+        return new ContactResource(restTemplate, serviceUrl, organizationId);
     }
 
     public ContactPersonResource  getContactPersonResource() {
-        return new ContactPersonResource(restTemplate, serviceUrl);
+        return new ContactPersonResource(restTemplate, serviceUrl, organizationId);
     }
     
     public InvoiceResource getInvoiceResource() {
-        return new InvoiceResource(restTemplate, serviceUrl);
+        return new InvoiceResource(restTemplate, serviceUrl, organizationId);
     }
     
     public ProductResource getProductResource() {
-        return new ProductResource(restTemplate, serviceUrl);
+        return new ProductResource(restTemplate, serviceUrl, organizationId);
     }
     
     public AccountResource getAccountResource() {
-        return new AccountResource(restTemplate, serviceUrl);
+        return new AccountResource(restTemplate, serviceUrl, organizationId);
     }
 
     public BankPaymentResource getBankPaymentResource() {
-        return new BankPaymentResource(restTemplate, serviceUrl);
+        return new BankPaymentResource(restTemplate, serviceUrl, organizationId);
     }
 }

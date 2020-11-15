@@ -14,7 +14,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class BankPaymentResourceTest extends ResourceTestBase<BankPayment> {
 
     public BankPaymentResourceTest() {
-        super(new BankPaymentResource(buildRestTemplate(), "http://server/Api"), BankPayment.class);
+        super(new BankPaymentResource(buildRestTemplate(), "http://server/Api", null), BankPayment.class);
     }
 
     @Override

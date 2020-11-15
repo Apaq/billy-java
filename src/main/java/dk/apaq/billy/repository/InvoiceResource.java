@@ -19,8 +19,9 @@ public class InvoiceResource extends Resource<Invoice>{
         SIDELOAD_PARAMS.put("include", "invoice.lines:embed");
     }
     
-    public InvoiceResource(RestTemplate restTemplate, String serviceUrl) {
-        super(SingularInvoiceMapping.class, PluralInvoiceMapping.class, PersistInvoiceMapping.class, "invoices", restTemplate, serviceUrl, SIDELOAD_PARAMS);
+    public InvoiceResource(RestTemplate restTemplate, String serviceUrl, String organizationId) {
+        super(SingularInvoiceMapping.class, PluralInvoiceMapping.class, PersistInvoiceMapping.class,
+                "invoices", restTemplate, serviceUrl, SIDELOAD_PARAMS, organizationId);
     }
     
     public void approve(String id) {

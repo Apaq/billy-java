@@ -15,7 +15,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 public class ContactPersonResourceTest extends ResourceTestBase<ContactPerson> {
 
     public ContactPersonResourceTest() {
-        super(new ContactPersonResource(buildRestTemplate(), "http://server/Api"), ContactPerson.class);
+        super(new ContactPersonResource(buildRestTemplate(), "http://server/Api", null), ContactPerson.class);
     }
 
     @Override
